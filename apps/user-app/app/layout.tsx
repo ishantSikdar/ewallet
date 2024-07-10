@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Appbar } from "@repo/ui/appBar"
+import { signIn, signOut } from "next-auth/react";
+import AppBar from "../components/AppBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,10 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <Providers>
-        <body className={geistSans.className}>{children}</body>
+        <body className={geistSans.className}>
+          <AppBar />
+          {children}
+        </body>
       </Providers>
     </html>
   );
