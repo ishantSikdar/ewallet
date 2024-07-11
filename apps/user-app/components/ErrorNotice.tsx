@@ -1,6 +1,6 @@
 'use client'
 
-import IconRegistry from "@repo/ui/icons"
+import IconRegistry from "@repo/ui/Icons"
 import { useEffect, useState } from "react";
 
 interface ErrorNoticeProps {

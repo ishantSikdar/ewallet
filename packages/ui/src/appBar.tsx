@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from "./button";
 import Image from 'next/image';
+import { Button } from './Button';
 
 interface AppbarProps {
     user?: {

@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import IconRegistry from './icons';
+import IconRegistry from './IconsRegistry';
 
 interface MenuItemType {
   iconKey: string,
