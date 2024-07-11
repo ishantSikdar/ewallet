@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "./button";
+import Image from 'next/image';
 
 interface AppbarProps {
     user?: {
@@ -16,11 +17,13 @@ export const Appbar = ({
     onSignin,
     onSignout
 }: AppbarProps) => {
-    return <div className="flex justify-between border-b px-4">
-        <div className="text-lg flex flex-col justify-center">
-            PayTM
-        </div>
-        <div className="flex flex-col justify-center pt-2">
+    return <div className="border-b-2 h-16 w-full flex justify-between items-center px-8 bg-[#fbf7f6] z-30">
+        <Image src={"/app-logo.png"}
+            alt="Description of the image"
+            width={80}
+            height={30}
+        />
+        <div>
             <Button onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
         </div>
     </div>
