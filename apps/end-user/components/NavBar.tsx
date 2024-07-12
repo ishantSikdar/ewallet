@@ -5,7 +5,6 @@ import { authOptions } from "../lib/auth/auth";
 import { redirect } from "next/navigation";
 
 export default async function NavBar() {
-
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {

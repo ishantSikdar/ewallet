@@ -15,6 +15,18 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<string | null>('');
 
+  const continueToPassword = () => {
+    setShowPasswordStage(p => !p);
+  }
+
+  const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>, callback: () => void) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      callback();
+    }
+  };
+
+
   const handleSignIn = async () => {
     try {
       const res = await signIn('credentials', {
@@ -48,13 +60,11 @@ export default function SignIn() {
       <h1 className="text-lg">Login</h1>
 
       {!showPasswordStage && <>
-        <input onChange={(e) => {
+        <input onKeyDown={(e) => handleEnterKey(e, continueToPassword)} onChange={(e) => {
           setPhoneNumber(e.target.value);
         }} type="text" name="" id="" className="h-12 bg-inherit rounded-md outline-none border-2 w-full text-sm p-2" placeholder="Enter Mobile Number" />
 
-        <button onClick={() => {
-          setShowPasswordStage(p => !p);
-        }} className="rounded-full w-full bg-blue-500 text-white h-10">
+        <button onClick={continueToPassword} className="rounded-full w-full bg-blue-500 text-white h-10">
           Next
         </button>
       </>}
@@ -66,7 +76,9 @@ export default function SignIn() {
           <div className='flex w-full'>
             <input onChange={(e) => {
               setPassword(e.target.value);
-            }} type={showPassword ? 'text' : 'password'} name="" id="" className="h-12 bg-inherit rounded-l-md outline-none border-2 w-full text-sm p-2" placeholder="Enter Password" />
+            }}
+              onKeyDown={(e) => handleEnterKey(e, handleSignIn)}
+              type={showPassword ? 'text' : 'password'} name="" id="" className="h-12 bg-inherit rounded-l-md outline-none border-2 w-full text-sm p-2" placeholder="Enter Password" />
 
             <button onClick={() => setShowPassword(p => !p)} className=' border-y-2 border-r-2 rounded-r-md w-12 flex justify-center items-center text-gray-500'>
               {!showPassword ? <FaEye /> : <FaEyeSlash />}

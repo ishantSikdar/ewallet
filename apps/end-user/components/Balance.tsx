@@ -3,6 +3,7 @@ export default function Balance({ amount, locked }: {
   amount: number;
   locked: number;
 }) {
+
   return <div className="text-sm pt-2">
     <div className="flex justify-between border-slate-300 pb-2">
       <div>
