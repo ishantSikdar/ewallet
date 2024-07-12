@@ -1,3 +1,5 @@
+'use server'
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
@@ -14,13 +16,13 @@ export async function getUserBalance() {
         },
         take: 1,
         select: {
-            amount: true,
+            totalBalance: true,
             locked: true,
         }
     });
 
     return {
-        amount: userBalance?.amount || 0,
+        amount: userBalance?.totalBalance || 0,
         locked: userBalance?.locked || 0,
     }
 }

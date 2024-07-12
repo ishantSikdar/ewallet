@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Balance" ALTER COLUMN "reason" DROP DEFAULT,
+ALTER COLUMN "totalBalance" DROP DEFAULT,
+ALTER COLUMN "transactionAmt" DROP DEFAULT;

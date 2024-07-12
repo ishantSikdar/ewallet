@@ -3,6 +3,7 @@
 import { Button } from "@repo/ui/Button";
 import { Select } from "@repo/ui/Select";
 import { useState } from "react";
+import { createOnRampTransaction } from "../lib/actions/onRampTransactions";
 
 const SUPPORTED_BANKS = [{
   name: "HDFC Bank",
@@ -13,10 +14,14 @@ const SUPPORTED_BANKS = [{
 }];
 
 export default function AddMoney() {
-  const [redirectUrl, setRedirectUrl] = useState<string | undefined>(SUPPORTED_BANKS[0]?.redirectUrl);
+  const [redirectUrl, setRedirectUrl] = useState<string>(SUPPORTED_BANKS[0]?.redirectUrl || '');
+  const [provider, setProvider] = useState<string>(SUPPORTED_BANKS[0]?.name || '');
   const [amount, setAmount] = useState<string>('');
 
+  console.log(amount, provider);
   const handleAddMoney = async () => {
+    await createOnRampTransaction(Number(amount), provider);
+    window.open(redirectUrl, '_blank');
   }
 
   return <>
@@ -29,6 +34,7 @@ export default function AddMoney() {
       <div>
         <h3 className="text-sm mb-1">Bank</h3>
         <Select onSelect={(value) => {
+          setProvider(value)
           setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === value)?.redirectUrl || "")
         }} options={SUPPORTED_BANKS.map(x => ({
           key: x.name,

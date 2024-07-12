@@ -1,8 +1,7 @@
+import { getUserBalance } from "../lib/actions/userBalance";
 
-export default function Balance({ amount, locked }: {
-  amount: number;
-  locked: number;
-}) {
+export default async function Balance() {
+  const userBalance = await getUserBalance();
 
   return <div className="text-sm pt-2">
     <div className="flex justify-between border-slate-300 pb-2">
@@ -10,7 +9,7 @@ export default function Balance({ amount, locked }: {
         Unlocked balance
       </div>
       <div>
-        {amount / 100} INR
+        {userBalance.amount / 100} INR
       </div>
     </div>
     <div className="flex justify-between border-slate-300 pb-2">
@@ -18,7 +17,7 @@ export default function Balance({ amount, locked }: {
         Total Locked Balance
       </div>
       <div>
-        {locked / 100} INR
+        {userBalance.locked / 100} INR
       </div>
     </div>
     <div className="flex justify-between border-slate-300">
@@ -26,7 +25,7 @@ export default function Balance({ amount, locked }: {
         Total Balance
       </div>
       <div>
-        {(locked + amount) / 100} INR
+        {(userBalance.locked + userBalance.amount) / 100} INR
       </div>
     </div>
   </div>

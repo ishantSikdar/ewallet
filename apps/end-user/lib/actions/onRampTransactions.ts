@@ -1,12 +1,24 @@
+'use server'
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
+import axios from "axios";
+import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
+
+interface TokenType {
+    token: string
+}
 
 export async function createOnRampTransaction(amount: number, provider: string) {
     const session = await getServerSession(authOptions);
-    const newToken = "dhsjbc-csdsdv-svdsvs-vsdvsdv";
-    
-    await prisma.onRampTransaction.create({
+    console.log('session', session);
+
+    const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`);
+    console.log('Token response', newTokenResponse.data)
+    const newToken = newTokenResponse.data.token;
+
+    const transaction = await prisma.onRampTransaction.create({
         data: {
             amount: amount * 100,
             provider: provider,
@@ -17,28 +29,31 @@ export async function createOnRampTransaction(amount: number, provider: string) 
         },
     });
 
+    console.log(transaction);
+
     return {
+        transactionId: transaction.id,
         message: "Done"
     }
 }
 
 export async function getRecentOnRampTransactions() {
     const session = await getServerSession(authOptions);
-    
+
     const recentTransactions = await prisma.onRampTransaction.findMany({
         where: {
             userId: Number(session?.user.id),
         },
         orderBy: {
             timestamp: "desc"
-        }, 
+        },
         take: 15,
         select: {
             id: true,
             amount: true,
             status: true,
             provider: true,
-            timestamp: true, 
+            timestamp: true,
         }
     })
 
@@ -49,7 +64,7 @@ export async function getRecentOnRampTransactions() {
             month: 'short',
             day: 'numeric',
             year: 'numeric',
-            timeZone: 'Asia/Kolkata' 
+            timeZone: 'Asia/Kolkata'
         })
     }));
 

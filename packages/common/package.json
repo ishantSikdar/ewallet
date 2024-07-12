@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "exports" : {
-    "./url": "./src/index.ts"
+    "./lib": "./src/index.ts",
+    "./route": "./src/routes.ts",
+    "./interface": "./src/interfaces.ts"
   },
   "keywords": [],
   "author": "",
