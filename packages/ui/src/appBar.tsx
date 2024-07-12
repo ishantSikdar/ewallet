@@ -17,12 +17,15 @@ export const Appbar = ({
     onSignin,
     onSignout
 }: AppbarProps) => {
-    return <div className="border-b-2 h-16 w-full flex justify-between items-center px-8 bg-[#fbf7f6] z-30">
-        <Image src={"/app-logo.png"}
+    return <div className="shadow-md fixed h-16 w-full flex justify-between items-center px-8 bg-[#fbf7f6] z-30">
+        <Image
+            src={"/app-logo.png"}
             alt="Description of the image"
             width={80}
-            height={30}
+            height={100}
+            style={{ height: 'auto' }}
         />
+
         <div>
             <Button onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
         </div>

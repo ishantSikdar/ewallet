@@ -3,7 +3,7 @@ import { ROUTE_HOME, ROUTE_P2P_TRANSFER, ROUTE_TRANSACTIONS, ROUTE_TRANSFER } fr
 
 export default function NavBar() {
   return (
-    <div className="mt-10 text-gray-500 flex flex-col gap-4 px-10 font-medium">
+    <div className="mt-10 text-gray-500 flex flex-col gap-1 px-5 font-medium">
       <MenuItem iconKey={'Home'} label={'Home'} route={ROUTE_HOME} />
       <MenuItem iconKey={'Transfer'} label={'Transfer'} route={ROUTE_TRANSFER} />
       <MenuItem iconKey={'Transactions'} label={'Transactions'} route={ROUTE_TRANSACTIONS} />

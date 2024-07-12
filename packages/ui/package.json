@@ -4,6 +4,8 @@
   "private": true,
   "exports": {
     "./Button": "./src/Button.tsx",
+    "./Select": "./src/Select.tsx",
+    "./WhiteCard": "./src/WhiteCard.tsx",
     "./Icons": "./src/IconsRegistry.tsx",
     "./MenuItem": "./src/MenuItem.tsx",
     "./AppBar": "./src/AppBar.tsx",

@@ -35,7 +35,7 @@ model OnRampTransaction {
   status    OnRampStatus
   token     String       @unique
   provider  String
-  amount    Float
+  amount    Int
   timestamp DateTime
   userId    Int
   user      User         @relation(fields: [userId], references: [id])
@@ -44,7 +44,7 @@ model OnRampTransaction {
 model Balance {
   id     Int   @id @default(autoincrement())
   userId Int   @unique
-  amount Float
+  amount Int
   locked Int
   user   User  @relation(fields: [userId], references: [id])
 }

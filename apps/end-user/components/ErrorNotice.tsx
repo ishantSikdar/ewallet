@@ -28,7 +28,7 @@ const ErrorNotice: React.FC<ErrorNoticeProps> = ({ text, closeCallback }) => {
   }, [closeCallback]);
 
   return (
-    <div className="fixed w-96 min-h-16 bottom-5 right-5 rounded-lg bg-red-500 text-white overflow-hidden">
+    <div className="fixed w-96 min-h-16 bottom-5 right-5 rounded-lg shadow-md bg-red-500 text-white overflow-hidden">
       <button onClick={closeCallback} className="absolute right-3 top-3 text-white">
         {CloseIcon && <CloseIcon />}
       </button>

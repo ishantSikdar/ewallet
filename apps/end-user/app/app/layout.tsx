@@ -6,13 +6,13 @@ export default function AppLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>
+  return <div className="h-screen">
     <AppBar />
-    <div className="flex">
-      <div className="w-60 border-r-2 h-screen">
+    <div className="flex pt-16 h-full">
+      <div className="w-60 shadow-md h-full">
         <NavBar />
       </div>
       {children}
     </div>
-  </>
+  </div>
 }
