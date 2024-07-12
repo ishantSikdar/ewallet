@@ -36,17 +36,18 @@ model OnRampTransaction {
   token     String       @unique
   provider  String
   amount    Int
-  timestamp DateTime
+  timestamp DateTime     @default(now())
   userId    Int
   user      User         @relation(fields: [userId], references: [id])
 }
 
 model Balance {
-  id     Int   @id @default(autoincrement())
-  userId Int   @unique
-  amount Int
-  locked Int
-  user   User  @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  amount    Int
+  locked    Int
+  timestamp DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum AuthType {
