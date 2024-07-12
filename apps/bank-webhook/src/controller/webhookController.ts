@@ -12,15 +12,31 @@ export const updateUserBalance = async (req: Request, res: Response) => {
     }
 
     try {
-        await prisma.$transaction(async (prisma) => {
-            const latestBalance = await prisma.balance.findFirst({
+        await prisma.$transaction(async (tx) => {
+            const balanceLockQuery = `SELECT * FROM "Balance" WHERE "userId"='${paymentInfo.userId}'`;
+            const onRampTransLockQuery = `SELECT * FROM "OnRampTransaction" WHERE "token"='${paymentInfo.token}'`;
+
+            await tx.$executeRawUnsafe(balanceLockQuery);
+            await tx.$executeRawUnsafe(onRampTransLockQuery);
+
+            const pendingOnRampTransaction = await tx.onRampTransaction.findFirst({
+                where: {
+                    token: paymentInfo.token,
+                },
+            });
+
+            if (pendingOnRampTransaction?.status !== 'Pending') {
+                throw new Error("Transaction is already completed");
+            }
+
+            const latestBalance = await tx.balance.findFirst({
                 where: { userId: paymentInfo.userId },
                 orderBy: { timestamp: 'desc' }
             });
-            
+
             const newBalanceAmt = paymentInfo.amount + (latestBalance?.totalBalance || 0);
 
-            const newBalance = await prisma.balance.create({
+            const newBalance = await tx.balance.create({
                 data: {
                     userId: paymentInfo.userId,
                     totalBalance: newBalanceAmt,
@@ -29,7 +45,7 @@ export const updateUserBalance = async (req: Request, res: Response) => {
                 }
             });
 
-            await prisma.onRampTransaction.update({
+            await tx.onRampTransaction.update({
                 where: {
                     token: paymentInfo.token
                 },
