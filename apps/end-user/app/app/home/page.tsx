@@ -1,10 +1,10 @@
 import WhiteCard from '@repo/ui/WhiteCard';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../lib/auth/auth';
-import PortfolioGraph from '../../../components/PortfolioGraph';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
+  console.log(session);
 
   const sampleData = [
     { balance: 1500, date: new Date('2024-01-01') },
@@ -21,8 +21,6 @@ export default async function Home() {
 
   return <div className="px-5 pt-8 w-full h-96">
     <h2 className="text-purple-700 font-bold text-2xl mb-3">Good Afternoon, {session?.user?.name}</h2>
-    <WhiteCard>
-      {/* <PortfolioGraph portfolioData={sampleData} /> */}
-    </WhiteCard>
+
   </div>
 }

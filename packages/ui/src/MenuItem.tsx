@@ -14,7 +14,6 @@ export default function MenuItem({ iconKey, label, route }: MenuItemType) {
   const Icon = IconRegistry[iconKey];
 
   const isSelected = pathname.includes(route);
-  console.log(pathname);
 
   const sendToPage = () => {
     router.push(route);

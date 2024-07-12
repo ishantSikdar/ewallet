@@ -1,3 +1,4 @@
+export const ROUTE_SIGNIN = "/signin";
 export const ROUTE_HOME = "/app/home";
 export const ROUTE_TRANSFER = "/app/transfer";
 export const ROUTE_TRANSACTIONS = "/app/transactions";
