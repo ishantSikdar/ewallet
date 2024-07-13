@@ -12,7 +12,9 @@ export default function AppLayout({
       <div className="w-60 shadow-md h-full">
         <NavBar />
       </div>
-      {children}
+      <div className="flex-grow">
+        {children}
+      </div>
     </div>
   </div>
 }

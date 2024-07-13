@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import ErrorNotice from './ErrorNotice';
+import Notice from './Notice';
 
 export default function SignIn() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>('');
+  const [error, setError] = useState<string>('');
 
   const continueToPassword = () => {
     setShowPasswordStage(p => !p);
@@ -97,7 +97,7 @@ export default function SignIn() {
     </div>
 
     {error &&
-      <ErrorNotice text={error} closeCallback={() => setError('')} />
+      <Notice color='red' text={error} closeCallback={() => setError('')} />
     }
   </div>
 }

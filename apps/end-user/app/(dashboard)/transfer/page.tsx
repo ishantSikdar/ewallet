@@ -1,28 +1,6 @@
-import WhiteCard from "@repo/ui/WhiteCard";
-import AddMoney from "../../../components/AddMoney";
-import Balance from "../../../components/Balance";
-import RecentTransactions from "../../../components/RecentTransactions";
+import { redirect } from "next/navigation";
+import { ROUTE_TRANSFER_P2P } from "../../../constants/routes";
 
-export default async function Transfer() {
-
-  return <div className="w-full flex justify-between p-5">
-    <div className="flex flex-col w-[48%]">
-      <WhiteCard>
-        <h2 className="pb-2 font-medium border-b-2">Add Money</h2>
-        <AddMoney />
-      </WhiteCard>
-    </div>
-
-    <div className="flex flex-col gap-3 w-[48%]">
-      <WhiteCard>
-        <h2 className="pb-2 font-medium border-b-2">Balance</h2>
-        <Balance />
-      </WhiteCard>
-
-      <WhiteCard>
-        <h2 className="pb-2 font-medium border-b-2">Recent Transactions</h2>
-        <RecentTransactions />
-      </WhiteCard>
-    </div>
-  </div>
+export default function Transfer() {
+  redirect(ROUTE_TRANSFER_P2P);
 }

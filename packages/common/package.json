@@ -9,7 +9,8 @@
   "exports" : {
     "./lib": "./src/index.ts",
     "./route": "./src/routes.ts",
-    "./interface": "./src/interfaces.ts"
+    "./interface": "./src/interfaces.ts",
+    "./date": "./src/date.ts"
   },
   "keywords": [],
   "author": "",

@@ -50,8 +50,9 @@ export const authOptions: NextAuthOptions = {
                                 password: await bcrypt.hash(credentials.password, 10),
                                 Balance: {
                                     create: {
-                                        amount: 0,
                                         locked: 0,
+                                        totalBalance: 0,
+                                        transactionAmt: 0,
                                     }
                                 }
                             }

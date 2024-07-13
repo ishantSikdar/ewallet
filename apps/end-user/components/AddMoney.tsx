@@ -18,7 +18,6 @@ export default function AddMoney() {
   const [provider, setProvider] = useState<string>(SUPPORTED_BANKS[0]?.name || '');
   const [amount, setAmount] = useState<string>('');
 
-  console.log(amount, provider);
   const handleAddMoney = async () => {
     await createOnRampTransaction(Number(amount), provider);
     window.open(redirectUrl, '_blank');

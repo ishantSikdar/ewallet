@@ -19,6 +19,7 @@ model User {
   name              String?
   number            String              @unique
   password          String
+  createdAt         DateTime            @default(now())
   OnRampTransaction OnRampTransaction[]
   Balance           Balance[]
 }
@@ -35,7 +36,7 @@ model OnRampTransaction {
   status    OnRampStatus
   token     String       @unique
   provider  String
-  amount    Int       
+  amount    Int
   timestamp DateTime     @default(now())
   userId    Int
   user      User         @relation(fields: [userId], references: [id])
@@ -43,10 +44,10 @@ model OnRampTransaction {
 
 model Balance {
   id             Int      @id @default(autoincrement())
-  userId         Int      
-  transactionAmt Int      
-  totalBalance   Int      
-  locked         Int       
+  userId         Int
+  transactionAmt Int
+  totalBalance   Int
+  locked         Int
   timestamp      DateTime @default(now())
   user           User     @relation(fields: [userId], references: [id])
 }
