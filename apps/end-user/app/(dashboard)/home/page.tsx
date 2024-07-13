@@ -27,7 +27,7 @@ export default async function Home() {
 
   return <div className="w-full h-full p-5">
     <h2 className="text-3xl text-purple-900 font-bold p-5">{greet}{session?.user.name}</h2>
-    <WhiteCard>
+    <WhiteCard className="">
       <div className="mb-5 ms-2 ">
         <h2 className="font-medium text-sm text-gray600">Balance</h2>
         <h2 className="text-gray-600 font-medium text-2xl">₹ <span className="text-black">{(currentBalance/100).toFixed(2)}</span></h2>

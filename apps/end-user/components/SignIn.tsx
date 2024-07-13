@@ -97,7 +97,7 @@ export default function SignIn() {
     </div>
 
     {error &&
-      <Notice color='red' text={error} closeCallback={() => setError('')} />
+      <Notice colorCode={0} text={error} closeCallback={() => setError('')} />
     }
   </div>
 }

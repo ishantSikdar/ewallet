@@ -32,10 +32,8 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
 
   const data = {
     labels: userBalance.map((ub) => new Date(ub.timestamp).toLocaleDateString('en-IN', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
+      hour: "2-digit",
+      minute: "2-digit",
       timeZone: 'Asia/Kolkata'
     })),
     datasets: [
@@ -43,10 +41,8 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
         label: "",
         data: userBalance.map((ub) => ({
           x: new Date(ub.timestamp).toLocaleDateString('en-IN', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
+            hour: "2-digit",
+            minute: "2-digit",
             timeZone: 'Asia/Kolkata'
           }),
           y: ub.totalBalance / 100,
@@ -87,14 +83,14 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
           }
         }
       }
-  
+
     },
     responsive: true,
     maintainAspectRatio: false, // Ensures the chart takes the full width
     scales: {
       x: {
         ticks: {
-          // display: false, // Hide x-axis labels
+          display: false, // Hide x-axis labels
         },
         grid: {
           display: false, // Optionally hide x-axis grid lines
@@ -108,7 +104,7 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
           }
         },
         grid: {
-          display: true, 
+          display: true,
         },
       },
     },

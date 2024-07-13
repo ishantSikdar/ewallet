@@ -54,8 +54,8 @@ export async function sendMoneyToUser(number: string, amount: number) {
     // start transaction
     await prisma.$transaction(async (tx) => {
 
-        // search for reciever and get their data + balance
-        const recieverUser = await tx.user.findFirst({
+        // search for receiver and get their data + balance
+        const receiverUser = await tx.user.findFirst({
             where: { number: number },
             select: {
                 id: true,
@@ -68,21 +68,22 @@ export async function sendMoneyToUser(number: string, amount: number) {
 
         // lock all balance enteries for both users
         const lockSenderBalanceQuery = `SELECT * FROM "Balance" WHERE "userId"='${senderId}' FOR UPDATE`;
-        const lockRecieverBalanceQuery = `SELECT * FROM "Balance" WHERE "userId"='${recieverUser?.id}' FOR UPDATE`;
+        const lockReceiverBalanceQuery = `SELECT * FROM "Balance" WHERE "userId"='${receiverUser?.id}' FOR UPDATE`;
 
-        await tx.$executeRawUnsafe(lockSenderBalanceQuery, lockRecieverBalanceQuery);
+        await tx.$executeRawUnsafe(lockSenderBalanceQuery, lockReceiverBalanceQuery);
 
-        const senderUserBalance = await tx.user.findFirst({
+        const senderUser = await tx.user.findFirst({
             where: { id: senderId },
             select: {
                 Balance: {
                     orderBy: { timestamp: "desc" },
                     take: 1
-                }
+                },
+                Contacts: true
             }
         });
 
-        const userCurrBalance = senderUserBalance?.Balance[0];
+        const userCurrBalance = senderUser?.Balance[0];
 
         if (userCurrBalance) {
             // checking user balance
@@ -90,16 +91,16 @@ export async function sendMoneyToUser(number: string, amount: number) {
                 throw new Error('Insufficent Funds');
             }
 
-            const recieverBalance = recieverUser?.Balance[0];
+            const receiverBalance = receiverUser?.Balance[0];
 
-            if (recieverBalance) {
+            if (receiverBalance) {
 
                 // increase receiver balance
                 await tx.balance.create({
                     data: {
-                        locked: recieverBalance.locked,
-                        totalBalance: recieverBalance.totalBalance + amount,
-                        userId: recieverUser.id,
+                        locked: receiverBalance.locked,
+                        totalBalance: receiverBalance.totalBalance + amount,
+                        userId: receiverUser.id,
                         transactionAmt: amount,
                     }
                 });
@@ -110,9 +111,26 @@ export async function sendMoneyToUser(number: string, amount: number) {
                         locked: userCurrBalance.locked,
                         totalBalance: userCurrBalance.totalBalance - amount,
                         userId: senderId,
-                        transactionAmt: 0 - amount,
+                        transactionAmt: -amount,
                     },
                 });
+
+                await tx.p2PTransfer.create({
+                    data: {
+                        amount: amount,
+                        fromUserId: senderId,
+                        toUserId: receiverUser.id,
+                    }
+                });
+
+                if (!senderUser.Contacts.find(contact => contact.contactId === receiverUser.id)) {
+                    await tx.contact.create({
+                        data: {
+                            userId: senderId,
+                            contactId: receiverUser.id,
+                        }
+                    });
+                }
             }
         }
     });
@@ -120,4 +138,71 @@ export async function sendMoneyToUser(number: string, amount: number) {
     return {
         message: "Amount sent"
     }
+}
+
+export async function getP2PTransactions() {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user.id) {
+        redirect(ROUTE_SIGNIN);
+    }
+
+    const userId = Number(session.user.id);
+
+    const p2pTransfers = await prisma.p2PTransfer.findMany({
+        where: {
+            OR: [
+                { toUserId: userId },
+                { fromUserId: userId }
+            ]
+        },
+        orderBy: {
+            timestamp: 'desc'
+        },
+        select: {
+            id: true,
+            amount: true,
+            timestamp: true,
+            FromUser: {
+                select: {
+                    id: true,
+                    name: true,
+                    number: true,
+                }
+            },
+            ToUser: {
+                select: {
+                    id: true,
+                    name: true,
+                    number: true,
+                }
+            }
+        }
+    });
+
+    return p2pTransfers.map((p) => {
+        const userToShow = p.FromUser.id === userId ? {
+            name: p.ToUser.name,
+            number: p.ToUser.number,
+        } : {
+            name: p.FromUser.name,
+            number: p.FromUser.number
+        };
+
+        return {
+            id: p.id,
+            amount: p.amount,
+            isReceiver: p.ToUser.id === userId,
+            timestamp: new Date(p.timestamp).toLocaleDateString('en-IN', {
+                hour: '2-digit',
+                minute: "2-digit",
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                timeZone: 'Asia/Kolkata'
+            }),
+            user: userToShow,
+        }
+    });
 }

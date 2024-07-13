@@ -10,7 +10,8 @@
     "./lib": "./src/index.ts",
     "./route": "./src/routes.ts",
     "./interface": "./src/interfaces.ts",
-    "./date": "./src/date.ts"
+    "./date": "./src/date.ts",
+    "./string": "./src/string.ts"
   },
   "keywords": [],
   "author": "",

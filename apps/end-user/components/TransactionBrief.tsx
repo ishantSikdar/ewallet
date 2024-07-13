@@ -2,7 +2,7 @@
 
 import { TransactionsBriefType } from "../lib/interfaces/TransactionBriefType"
 
-export default function TransactionBrief({ amount, provider, status, timestamp }: TransactionsBriefType) {
+export default function TransactionBrief({ amount, status, timestamp, }: TransactionsBriefType) {
   let headline: string = '';
   let headlineColor: string = '';
   let amountColor: string = '';
@@ -14,7 +14,7 @@ export default function TransactionBrief({ amount, provider, status, timestamp }
 
   } else if (status === 'Success') {
     headline = amount >= 0 ? 'Received INR' : 'Sent INR';
-    amountColor = amount > 0 ? 'text-green-500' : 'text-red-500';
+    amountColor = amount >= 0 ? 'text-green-500' : 'text-red-500';
     headlineColor = 'text-green-500';
 
   } else if (status === 'Failure') {

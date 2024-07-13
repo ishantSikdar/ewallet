@@ -39,7 +39,7 @@ export default function SendMoney() {
       </Button>
     </div>
 
-    {error && <Notice color="red" text={error} closeCallback={() => setError('')} />}
-    {success && <Notice color="green" text={success} closeCallback={() => setSuccess('')} />}
+    {error && <Notice colorCode={0} text={error} closeCallback={() => setError('')} />}
+    {success && <Notice colorCode={1} text={success} closeCallback={() => setSuccess('')} />}
   </>
 }

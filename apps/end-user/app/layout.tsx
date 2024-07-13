@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Appbar } from "@repo/ui/appBar"
-import { signIn, signOut } from "next-auth/react";
-import AppBar from "../components/AppBar";
-import NavBar from "../components/NavBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,11 +25,11 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Providers>
-        <body className={geistSans.className}>
+      <body className={geistSans.className}>
+        <Providers>
           {children}
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }

@@ -14,14 +14,20 @@ datasource db {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
-  email             String?             @unique
-  name              String?
-  number            String              @unique
-  password          String
-  createdAt         DateTime            @default(now())
-  OnRampTransaction OnRampTransaction[]
-  Balance           Balance[]
+  id                 Int                  @id @default(autoincrement())
+  email              String?              @unique
+  name               String?
+  number             String               @unique
+  password           String
+  createdAt          DateTime             @default(now())
+  color              Color                @default(CYAN)
+  OnRampTransaction  OnRampTransaction[]
+  OffRampTransaction OffRampTransaction[]
+  Balance            Balance[]
+  SentTransfers      P2PTransfer[]        @relation(name: "FromUserRelation")
+  ReceivedTransfers  P2PTransfer[]        @relation(name: "ToUserRelation")
+  Contacts           Contact[]            @relation(name: "UserContacts")
+  ContactOf          Contact[]            @relation(name: "ContactOfUser")
 }
 
 model Merchant {
@@ -39,7 +45,18 @@ model OnRampTransaction {
   amount    Int
   timestamp DateTime     @default(now())
   userId    Int
-  user      User         @relation(fields: [userId], references: [id])
+  User      User         @relation(fields: [userId], references: [id])
+}
+
+model OffRampTransaction {
+  id        Int          @id @default(autoincrement())
+  status    OnRampStatus
+  token     String       @unique
+  provider  String
+  amount    Int
+  timestamp DateTime     @default(now())
+  userId    Int
+  User      User         @relation(fields: [userId], references: [id])
 }
 
 model Balance {
@@ -52,6 +69,27 @@ model Balance {
   user           User     @relation(fields: [userId], references: [id])
 }
 
+model P2PTransfer {
+  id         Int      @id @default(autoincrement())
+  amount     Int
+  timestamp  DateTime @default(now())
+  fromUserId Int
+  toUserId   Int
+  FromUser   User     @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  ToUser     User     @relation(name: "ToUserRelation", fields: [toUserId], references: [id])
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  contactId Int
+  createdAt DateTime @default(now())
+  User      User     @relation("UserContacts", fields: [userId], references: [id])
+  Contact   User     @relation("ContactOfUser", fields: [contactId], references: [id])
+
+  @@unique([userId, contactId])
+}
+
 enum AuthType {
   Google
   Github
@@ -61,4 +99,12 @@ enum OnRampStatus {
   Pending
   Success
   Failure
+}
+
+enum Color {
+  GREEN
+  BLUE
+  YELLOW
+  PURPLE
+  CYAN
 }

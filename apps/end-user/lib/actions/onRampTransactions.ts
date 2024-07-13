@@ -29,8 +29,6 @@ export async function createOnRampTransaction(amount: number, provider: string) 
         },
     });
 
-    console.log(transaction);
-
     return {
         transactionId: transaction.id,
         message: "Done"
