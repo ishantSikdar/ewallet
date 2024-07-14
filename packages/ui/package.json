@@ -5,12 +5,14 @@
   "exports": {
     "./Button": "./src/Button.tsx",
     "./Select": "./src/Select.tsx",
+    "./InputBox": "./src/InputBox.tsx",
     "./WhiteCard": "./src/WhiteCard.tsx",
     "./Icons": "./src/IconsRegistry.tsx",
     "./MenuItem": "./src/MenuItem.tsx",
     "./AppBar": "./src/AppBar.tsx",
     "./Card": "./src/Card.tsx",
-    "./Code": "./src/Code.tsx"
+    "./Code": "./src/Code.tsx",
+    "./CenterOverlay": "./src/CenterOverlay.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

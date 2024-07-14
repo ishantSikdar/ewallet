@@ -1,5 +1,6 @@
 'use client'
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { usePathname } from 'next/navigation';
 import IconRegistry from './IconsRegistry';
 
 interface MenuItemType {

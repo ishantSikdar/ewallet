@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "@repo/ui/Button";
+import { InputBox } from "@repo/ui/InputBox";
 import { useState } from "react";
 import { sendMoneyToUser } from "../lib/actions/userBalance";
 import Notice from "./Notice";
@@ -25,12 +26,12 @@ export default function SendMoney() {
   return <>
     <div className="mb-2">
       <p className="text-xs ms-1 mb-1 font-medium">Mobile</p>
-      <input onChange={(e) => setNumber(e.target.value)} type="text" placeholder="0000000000" className="h-10 w-full rounded-md bg-[#fbf7f6] p-2 text-sm border-b-2 outline-none" />
+      <InputBox onChange={setNumber} type="text" placeholder="0000000000" />
     </div>
 
     <div className="mb-6">
       <p className="text-xs ms-1 mb-1 font-medium">Amount (₹)</p>
-      <input onChange={(e) => setAmount(e.target.value)} type="text" placeholder="100" className="h-10 w-full rounded-md bg-[#fbf7f6] p-2 text-sm border-b-2 outline-none" />
+      <InputBox onChange={setAmount} type="text" placeholder="100" />
     </div>
 
     <div className="flex justify-end">

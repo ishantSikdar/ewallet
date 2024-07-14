@@ -17,6 +17,7 @@ export async function getUserContacts() {
                     id: true,
                     name: true,
                     number: true,
+                    color: true
                 },
             },
 

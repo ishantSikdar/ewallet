@@ -6,8 +6,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth/auth";
 
 export default async function Home() {
-  const userBalance = await getUserBalanceOvertime();
-  const session = await getServerSession(authOptions);
+  const [userBalance, session] = await Promise.all([
+    getUserBalanceOvertime(),
+    getServerSession(authOptions)
+  ]);
+  
 
   const latestBalance = userBalance[userBalance.length - 1];
   const currentBalance = latestBalance?.totalBalance || 0;

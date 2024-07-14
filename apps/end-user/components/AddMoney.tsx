@@ -4,6 +4,7 @@ import { Button } from "@repo/ui/Button";
 import { Select } from "@repo/ui/Select";
 import { useState } from "react";
 import { createOnRampTransaction } from "../lib/actions/onRampTransactions";
+import { InputBox } from "@repo/ui/InputBox";
 
 const SUPPORTED_BANKS = [{
   name: "HDFC Bank",
@@ -27,7 +28,7 @@ export default function AddMoney() {
     <div className="flex flex-col gap-4 pt-2">
       <div>
         <h3 className="text-sm mb-1">Amount</h3>
-        <input onChange={(e) => setAmount(e.target.value)} type="text" placeholder="Amount" className="p-3 w-full border-2 outline-none rounded-md h-9 text-sm" />
+        <InputBox onChange={setAmount} type="text" placeholder="Amount" />
       </div>
 
       <div>
@@ -47,5 +48,5 @@ export default function AddMoney() {
         </Button>
       </div>
     </div>
-    </>
+  </>
 }

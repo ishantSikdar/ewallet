@@ -6,8 +6,11 @@ import { getUserContacts } from "../../../../lib/actions/contacts";
 import RecentContacts from "../../../../components/RecentContacts";
 
 export default async function P2PTransfer() {
-  const recentP2PTransfers = await getP2PTransactions();
-  const userContacts = await getUserContacts();
+
+  const [recentP2PTransfers, userContacts] = await Promise.all([
+    getP2PTransactions(),
+    getUserContacts()
+  ]);
 
   return <div className="flex gap-6 justify-between" >
 

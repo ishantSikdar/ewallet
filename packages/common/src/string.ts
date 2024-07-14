@@ -1,3 +1,5 @@
+import { emailRegex, tenDigitNumberRegex } from "./regex";
+
 export const getInitials = (name: string) => {
     if (!name) return '';
 
@@ -10,3 +12,11 @@ export const getInitials = (name: string) => {
     // Join the initials and return the result
     return initials.join('');
 };
+
+export const isMobileThenReturn = (key: string) => {
+    return tenDigitNumberRegex.test(key) ? key : null;   
+}
+
+export const isEmailThenReturn = (key: string) => {
+    return emailRegex.test(key) ? key : null;   
+}

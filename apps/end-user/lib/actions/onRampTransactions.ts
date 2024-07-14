@@ -12,10 +12,8 @@ interface TokenType {
 
 export async function createOnRampTransaction(amount: number, provider: string) {
     const session = await getServerSession(authOptions);
-    console.log('session', session);
 
     const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`);
-    console.log('Token response', newTokenResponse.data)
     const newToken = newTokenResponse.data.token;
 
     const transaction = await prisma.onRampTransaction.create({

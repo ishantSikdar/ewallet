@@ -17,10 +17,12 @@ model User {
   id                 Int                  @id @default(autoincrement())
   email              String?              @unique
   name               String?
-  number             String               @unique
-  password           String
+  number             String?              @unique
+  password           String?
   createdAt          DateTime             @default(now())
   color              Color                @default(CYAN)
+  isReady            Boolean              @default(false)
+  authProvider       AuthType?
   OnRampTransaction  OnRampTransaction[]
   OffRampTransaction OffRampTransaction[]
   Balance            Balance[]
@@ -34,7 +36,7 @@ model Merchant {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
-  auth_type AuthType
+  auth_type AuthType?
 }
 
 model OnRampTransaction {
@@ -91,6 +93,7 @@ model Contact {
 }
 
 enum AuthType {
+  Credentials
   Google
   Github
 }

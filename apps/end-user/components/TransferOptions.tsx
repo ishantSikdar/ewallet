@@ -1,7 +1,8 @@
 'use client'
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import { ROUTE_TRANSFER_DEPOSIT, ROUTE_TRANSFER_P2P, ROUTE_TRANSFER_WITHDRAW } from "../constants/routes";
+import { usePathname } from "next/navigation";
 
 export default function TransferOptions() {
   const router = useRouter();

@@ -11,7 +11,8 @@ export const Select = ({ options, onSelect }: {
 
   return <select onChange={(e) => {
     onSelect(e.target.value)
-  }} className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+  }} className={`h-10 w-full rounded-md bg-[#fbf7f6] p-2 text-sm border-b-2 outline-none`}
+  >
     {options.map((option, idx) => <option key={idx} value={option.key}>{option.value}</option>)}
   </select>
 

@@ -1,7 +1,7 @@
 "use client"
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
-import { Next13ProgressBar } from 'next13-progressbar';
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return <>
@@ -10,6 +10,11 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         {children}
       </SessionProvider>
     </RecoilRoot>
-    <Next13ProgressBar />
+    <ProgressBar
+        height="4px"
+        color="#00c0f1"
+        options={{ showSpinner: false }}
+        shallowRouting
+      />
   </>
 }

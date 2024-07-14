@@ -11,7 +11,10 @@
     "./route": "./src/routes.ts",
     "./interface": "./src/interfaces.ts",
     "./date": "./src/date.ts",
-    "./string": "./src/string.ts"
+    "./string": "./src/string.ts",
+    "./regex": "./src/regex.ts",
+    "./color": "./src/color.ts",
+    "./array": "./src/array.ts"
   },
   "keywords": [],
   "author": "",
