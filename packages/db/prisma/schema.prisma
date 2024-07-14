@@ -41,7 +41,7 @@ model Merchant {
 
 model OnRampTransaction {
   id        Int          @id @default(autoincrement())
-  status    OnRampStatus
+  status    RampStatus
   token     String       @unique
   provider  String
   amount    Int
@@ -52,7 +52,7 @@ model OnRampTransaction {
 
 model OffRampTransaction {
   id        Int          @id @default(autoincrement())
-  status    OnRampStatus
+  status    RampStatus
   token     String       @unique
   provider  String
   amount    Int
@@ -98,7 +98,7 @@ enum AuthType {
   Github
 }
 
-enum OnRampStatus {
+enum RampStatus {
   Pending
   Success
   Failure

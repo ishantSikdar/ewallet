@@ -46,3 +46,19 @@ export async function updateUserInit(name: string, email: string, number: string
         message: "Success"
     }
 }
+
+export async function getUserByNumber(number: string) {
+    return await prisma.user.findFirst({
+        where: {
+            number: {
+                startsWith: number
+            }
+        },
+        select: {
+            id: true,
+            name: true,
+            number: true,
+            color: true,
+        }
+    });
+}

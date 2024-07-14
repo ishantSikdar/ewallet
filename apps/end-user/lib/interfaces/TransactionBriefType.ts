@@ -35,3 +35,10 @@ export interface SplashType {
     email: string | null;
     isReady: boolean;
 }
+
+export interface UserPublicType {
+    id: number,
+    name: string | null,
+    number: string | null,
+    color: string,
+}

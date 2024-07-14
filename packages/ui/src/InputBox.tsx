@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react"
+
 interface InputProps {
   placeholder?: string,
   className?: string,
@@ -5,10 +7,20 @@ interface InputProps {
   lock?: boolean,
   onChange: (...args: any[]) => void,
   onKeyDown?: (...args: any[]) => void,
+  value?: string,
 }
 
-export function InputBox({ placeholder, className, onChange, onKeyDown, type, lock }: InputProps) {
+export function InputBox({ placeholder, className, onChange, onKeyDown, type, lock, value }: InputProps) {
+  const inputBoxRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputBoxRef.current && value) {
+      inputBoxRef.current.value = value;
+    }
+  }, [value])
+
   return <input
+    ref={inputBoxRef}
     onChange={(e) => onChange(e.target.value)}
     onKeyDown={onKeyDown}
     type={type}

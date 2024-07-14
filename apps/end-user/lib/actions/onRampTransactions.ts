@@ -43,7 +43,6 @@ export async function getRecentOnRampTransactions() {
         orderBy: {
             timestamp: "desc"
         },
-        take: 15,
         select: {
             id: true,
             amount: true,
