@@ -5,6 +5,7 @@ import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
 import { redirect } from "next/navigation";
 import { ROUTE_SIGNIN } from "../../constants/routes";
+import { getUserServerSession } from "./session";
 
 export async function getUserBalance() {
     const session = await getServerSession(authOptions);
@@ -168,6 +169,7 @@ export async function getP2PTransactions() {
                     id: true,
                     name: true,
                     number: true,
+                    email: true,
                 }
             },
             ToUser: {
@@ -175,6 +177,7 @@ export async function getP2PTransactions() {
                     id: true,
                     name: true,
                     number: true,
+                    email: true,
                 }
             }
         }
@@ -184,9 +187,97 @@ export async function getP2PTransactions() {
         const userToShow = p.FromUser.id === userId ? {
             name: p.ToUser.name,
             number: p.ToUser.number,
+            email: p.ToUser.email
         } : {
             name: p.FromUser.name,
-            number: p.FromUser.number
+            number: p.FromUser.number,
+            email: p.FromUser.email
+        };
+
+        return {
+            id: p.id,
+            amount: p.amount,
+            isReceiver: p.ToUser.id === userId,
+            timestamp: new Date(p.timestamp).toLocaleDateString('en-IN', {
+                hour: '2-digit',
+                minute: "2-digit",
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                timeZone: 'Asia/Kolkata'
+            }),
+            user: userToShow,
+        }
+    });
+}
+
+export async function getUsersAllP2PTransactions(
+    // name: string,
+    // number: string,
+    // email: string,
+    // agt: number,
+    // alt: number
+) {
+    const session = await getUserServerSession();
+    const userId = Number(session.user.id);
+
+    const p2pTransfers = await prisma.p2PTransfer.findMany({
+        where: {
+            OR: [
+                { toUserId: userId },
+                { fromUserId: userId }
+            ],
+            // ToUser: {
+            //     name: { contains: name },
+            //     email: { contains: email },
+            //     number: { contains: number },
+            // },
+            // FromUser: {
+            //     name: { contains: name },
+            //     email: { contains: email },
+            //     number: { contains: number },
+            // }, 
+            // amount: {
+            //     gte: agt,
+            //     lte: alt
+            // }
+        },
+        orderBy: {
+            timestamp: 'desc'
+        },
+        select: {
+            id: true,
+            amount: true,
+            timestamp: true,
+            FromUser: {
+                select: {
+                    id: true,
+                    name: true,
+                    number: true,
+                    email: true,
+                }
+            },
+            ToUser: {
+                select: {
+                    id: true,
+                    name: true,
+                    number: true,
+                    email: true,
+                }
+            }
+        }
+    });
+
+    return p2pTransfers.map((p) => {
+        const userToShow = p.FromUser.id === userId ? {
+            name: p.ToUser.name,
+            number: p.ToUser.number,
+            email: p.ToUser.email
+        } : {
+            name: p.FromUser.name,
+            number: p.FromUser.number,
+            email: p.FromUser.email
         };
 
         return {

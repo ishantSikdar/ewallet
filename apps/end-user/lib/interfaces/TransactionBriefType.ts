@@ -5,7 +5,6 @@ export interface TransactionsBriefType {
     amount: number;
 }
 
-
 export interface P2PTransferType {
     id: number,
     amount: number;
@@ -14,6 +13,7 @@ export interface P2PTransferType {
     user: {
         name: string | null;
         number: string | null;
+        email: string | null;
     };
 }
 
@@ -41,4 +41,12 @@ export interface UserPublicType {
     name: string | null,
     number: string | null,
     color: string,
+}
+
+export interface OffRampTransaction {
+    id: number,
+    amount: number,
+    provider: string
+    status: string,
+    timestamp: string, 
 }
