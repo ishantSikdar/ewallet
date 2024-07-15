@@ -13,12 +13,12 @@ export default function TransactionBrief({ amount, status, timestamp, isDeposite
     headlineColor = 'text-yellow-500';
 
   } else if (status === 'Success') {
-    headline = amount >= 0 ? 'Received INR' : 'Sent INR';
+    headline =  isDeposited ? 'Deposited INR' : "Received INR";
     amountColor = amount >= 0 ? 'text-green-500' : 'text-red-500';
     headlineColor = 'text-green-500';
 
   } else if (status === 'Failure') {
-    headline = 'Transfer Failed';
+    headline = 'Transaction Failed';
     amountColor = '';
     headlineColor = 'text-red-500';
   }

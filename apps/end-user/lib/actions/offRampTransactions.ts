@@ -28,6 +28,8 @@ export async function getRecentOffRampTransactions() {
     const formattedTransactions = recentTransactions.map(transaction => ({
         ...transaction,
         timestamp: new Date(transaction.timestamp).toLocaleDateString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
             weekday: 'short',
             month: 'short',
             day: 'numeric',

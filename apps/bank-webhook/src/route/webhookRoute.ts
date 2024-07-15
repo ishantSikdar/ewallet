@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { updateUserBalance } from "../controller/webhookController";
-import { SUB_ROUTE_HDFC } from "@repo/common/route";
+import { depositUserBalance, withdrawUserBalance } from "../controller/webhookController";
+import { SUB_ROUTE_DEPOSIT, SUB_ROUTE_WITHDRAW } from "@repo/common/route";
 
 const webHookRouter = Router()
 
-webHookRouter.post(SUB_ROUTE_HDFC, updateUserBalance)
+webHookRouter.post(SUB_ROUTE_WITHDRAW, withdrawUserBalance)
+webHookRouter.post(SUB_ROUTE_DEPOSIT, depositUserBalance)
 
 export default webHookRouter;
