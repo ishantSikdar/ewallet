@@ -24,6 +24,10 @@ Here, I tried to spoof the external bank softwares, i.e, they mimicks like a ban
   
     ![alt text](docs/P2PArchitecture.png)
 
+### Schema
+
+  ![alt text](docs/db-schema.png)
+
 ## Quick start
 
 Run the following command to start all applications:
