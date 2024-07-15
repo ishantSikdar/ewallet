@@ -40,7 +40,7 @@ export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P
               {t.timestamp}
             </td>
             <td className={`py-2 ${t.isReceiver ? 'text-green-500' : 'text-red-500'}`}>
-              {t.isReceiver ? '+' : '-'}{t.amount}
+              {t.isReceiver ? '+' : '-'}{(t.amount/100).toFixed(2)}
             </td>
           </tr>)}
       </tbody>

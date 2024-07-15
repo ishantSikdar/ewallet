@@ -8,9 +8,10 @@ import Notice from "./Notice";
 import { UserPublicType } from "../lib/interfaces/TransactionBriefType";
 import { getUserByNumber } from "../lib/actions/user";
 import ContactCard from "./ContactCard";
+import { useSendMoneyInputState } from "@repo/store/useApp";
 
 export default function SendMoney() {
-  const [number, setNumber] = useState<string>('');
+  const [number, setNumber] = useSendMoneyInputState();
   const [amount, setAmount] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');

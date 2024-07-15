@@ -34,7 +34,7 @@ export default function WithdrawlsTable({ withdrawalTransactions }: { withdrawal
               {t.status}
             </td>
             <td className={`py-2 ${t.status === 'Pending' ? 'text-yellow-500' : t.status === 'Success' ? 'text-green-500' : 'text-red-500'}  border-[1pt]`}>
-              +{t.amount}
+              +{(t.amount/100).toFixed(2)}
             </td>
           </tr>)}
       </tbody>

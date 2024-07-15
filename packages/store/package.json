@@ -5,7 +5,8 @@
   "main": "index.js",
   "exports": {
     "./useUser": "./src/hooks/useUser.ts",
-    "./useBalance": "./src/hooks/useBalance.ts"
+    "./useBalance": "./src/hooks/useBalance.ts",
+    "./useApp": "./src/hooks/useApp.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
