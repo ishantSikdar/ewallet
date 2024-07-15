@@ -119,37 +119,37 @@ export const authOptions: NextAuthOptions = {
             }
             return session;
         },
-        async signIn({ user, account, profile, email, credentials }) {
-            if (['google', 'github'].includes(account?.provider as string)) {
-                console.log(`provider`, account?.provider);
-                const existingUser = await db.user.findFirst({
-                    where: {
-                        email: profile?.email
-                    },
-                });
-                console.log(`existingUser`, existingUser);
+        // async signIn({ user, account, profile, email, credentials }) {
+        //     if (['google', 'github'].includes(account?.provider as string)) {
+        //         console.log(`provider`, account?.provider);
+        //         const existingUser = await db.user.findFirst({
+        //             where: {
+        //                 email: profile?.email
+        //             },
+        //         });
+        //         console.log(`existingUser`, existingUser);
 
-                if (!existingUser) {
-                    const newUser = await db.user.create({
-                        data: {
-                            email: profile?.email,
-                            name: profile?.name,
-                            color: getRandom(colors) || Color.CYAN,
-                            isReady: false,
-                            authProvider: account?.provider === 'google' ? "Google" : "Github",
-                            Balance: {
-                                create: {
-                                    locked: 0,
-                                    totalBalance: 0,
-                                    transactionAmt: 0
-                                }
-                            }
-                        }
-                    })
-                }
-            }
-            return true;
-        }
+        //         if (!existingUser) {
+        //             const newUser = await db.user.create({
+        //                 data: {
+        //                     email: profile?.email,
+        //                     name: profile?.name,
+        //                     color: getRandom(colors) || Color.CYAN,
+        //                     isReady: false,
+        //                     authProvider: account?.provider === 'google' ? "Google" : "Github",
+        //                     Balance: {
+        //                         create: {
+        //                             locked: 0,
+        //                             totalBalance: 0,
+        //                             transactionAmt: 0
+        //                         }
+        //                     }
+        //                 }
+        //             })
+        //         }
+        //     }
+        //     return true;
+        // }
     },
     pages: {
         signIn: '/signin',

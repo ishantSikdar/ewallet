@@ -1,81 +1,53 @@
-# Turborepo starter
+# eWallet System
 
-This is an official starter Turborepo.
+This is repository contains web softwares for a eWallet system.
 
-## Using this example
+System aims to perform operations like a real e-wallet applications like PayTM, i.e, able to transfer funds from one user to another, deposit and withdraw funds from external banks, and track the movement of funds.
 
-Run the following command:
+Here, I tried to spoof the external bank softwares, i.e, they mimicks like a bank software, but arent, they just play along to complete the flow of the application. 
+
+## Architecture
+
+![alt text](docs/architecture.png)
+
+### Features
+
+  - Add balance into Wallet (Withdraw)
+  
+    ![alt text](docs/withdraw-architecture.png)
+
+  - Deposit wallet balance into Bank (Deposit)
+  
+    ![alt text](docs/deposit-architecture.png)
+
+  - P2P Wallet balance transfer
+  
+    ![alt text](docs/P2PArchitecture.png)
+
+## Quick start
+
+Run the following command to start all applications:
 
 ```sh
-npx create-turbo@latest
+npm run dev
 ```
 
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
 
-### Apps and Packages
+### Apps
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `end-user`: [Next.js]() app for end users to use the wallet.
+- `merchant-app`: [Next.js]() for registered merchants.
+- `bank-webhook`: [Node.js]() app to receive requests from integrated banks.
+- `bank-mock`: [Node.js]() app to mimick a bank system.
+- `bank-interface`: [React.js]() app to mimick a bank user interface.
+
+### Packages
+- `@repo/ui`: [React.js]() component library that can be shared across apps.
+- `@repo/common`: Utility folder containing common modules and functions.
+- `@repo/db`: Singleton [Prisma]() client.
+- `@repo/store`: Centeralised folder for [Recoil]() hooks, atoms and selectors.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
