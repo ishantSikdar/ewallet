@@ -38,16 +38,16 @@ This Turborepo includes the following packages/apps:
 
 ### Apps
 
-- `end-user`: [Next.js]() app for end users to use the wallet.
-- `merchant-app`: [Next.js]() for registered merchants.
-- `bank-webhook`: [Node.js]() app to receive requests from integrated banks.
-- `bank-mock`: [Node.js]() app to mimick a bank system.
+- `end-user`: [Next.js](apps/end-user/) app for end users to use the wallet.
+- `merchant-app`: [Next.js](apps/merchant-app/) for registered merchants.
+- `bank-webhook`: [Node.js](apps/bank-webhook/) app to receive requests from integrated banks.
+- `bank-mock`: [Node.js](apps/bank-mock/) app to mimick a bank system.
 - `bank-interface`: [React.js]() app to mimick a bank user interface.
 
 ### Packages
-- `@repo/ui`: [React.js]() component library that can be shared across apps.
-- `@repo/common`: Utility folder containing common modules and functions.
-- `@repo/db`: Singleton [Prisma]() client.
-- `@repo/store`: Centeralised folder for [Recoil]() hooks, atoms and selectors.
+- `@repo/ui`: [React.js](packages/ui/) component library that can be shared across apps.
+- `@repo/common`: Utility folder containing common [TypeScript](packages/common/) modules and functions.
+- `@repo/db`: Singleton [Prisma](packages/db/) client.
+- `@repo/store`: Centeralised folder for [Recoil](packages/store/) hooks, atoms and selectors.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Each package/app is 100% Typescript.
