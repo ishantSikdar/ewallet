@@ -8,10 +8,12 @@ import { authOptions } from "../auth/auth";
 export async function getUserServerSession() {
     const session = await getServerSession(authOptions);
 
+
     if (!session?.user) {
         await signOut({
             callbackUrl: ROUTE_SIGNIN
         });
+        return null;
         
     } else {
         return session;

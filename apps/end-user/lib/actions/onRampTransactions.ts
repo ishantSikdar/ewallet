@@ -5,10 +5,8 @@ import prisma from "@repo/db/client";
 import axios from "axios";
 import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
 import { getUserServerSession } from "./session";
+import { TokenType } from "../interfaces/TransactionBriefType";
 
-interface TokenType {
-    token: string
-}
 
 export async function createOnRampTransaction(amount: number, provider: string) {
     const session = await getUserServerSession();

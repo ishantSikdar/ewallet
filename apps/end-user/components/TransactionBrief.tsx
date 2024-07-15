@@ -2,7 +2,7 @@
 
 import { TransactionsBriefType } from "../lib/interfaces/TransactionBriefType"
 
-export default function TransactionBrief({ amount, status, timestamp, }: TransactionsBriefType) {
+export default function TransactionBrief({ amount, status, timestamp, isDeposited }: TransactionsBriefType) {
   let headline: string = '';
   let headlineColor: string = '';
   let amountColor: string = '';
@@ -29,6 +29,6 @@ export default function TransactionBrief({ amount, status, timestamp, }: Transac
       <p className="text-gray-500 text-xs">{timestamp}</p>
     </div>
 
-    <p className={`${amountColor} font-medium ${status === 'Failure' && 'line-through'}`}>{amount >= 0 ? '+' : '-'} {Math.abs(amount) / 100}</p>
+    <p className={`${amountColor} font-medium ${status === 'Failure' && 'line-through'}`}>{isDeposited ? '-' : '+'} {Math.abs(amount) / 100}</p>
   </button>
 }

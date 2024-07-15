@@ -6,8 +6,8 @@ import IconRegistry from '@repo/ui/Icons'
 import { InputBox } from '@repo/ui/InputBox'
 import { updateUserInit } from '../lib/actions/user'
 import { useState } from 'react'
-import { useRouter } from 'next-nprogress-bar'
 import { ROUTE_SIGNIN } from '../constants/routes'
+import { signOut } from 'next-auth/react'
 
 interface UserState {
   name: string;
@@ -19,7 +19,6 @@ interface UserState {
 }
 
 export default function EditUserPage({ userState }: { userState: UserState }) {
-  const router = useRouter();
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -38,7 +37,9 @@ export default function EditUserPage({ userState }: { userState: UserState }) {
   }
 
   const goToSignInPage = () => {
-    router.push(ROUTE_SIGNIN);
+    signOut({
+      callbackUrl: ROUTE_SIGNIN
+    })
   }
 
   return <CenterOverlay>

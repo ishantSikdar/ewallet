@@ -136,7 +136,7 @@ export async function sendMoneyToUser(number: string, amount: number) {
 export async function getP2PTransactions() {
     const session = await getUserServerSession();
 
-    const userId = Number(session.user.id);
+    const userId = Number(session?.user.id);
 
     const p2pTransfers = await prisma.p2PTransfer.findMany({
         where: {
@@ -208,7 +208,7 @@ export async function getUsersAllP2PTransactions(
     // alt: number
 ) {
     const session = await getUserServerSession();
-    const userId = Number(session.user.id);
+    const userId = Number(session?.user.id);
 
     const p2pTransfers = await prisma.p2PTransfer.findMany({
         where: {

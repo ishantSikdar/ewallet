@@ -3,6 +3,7 @@ export interface TransactionsBriefType {
     timestamp: string;
     status: string;
     amount: number;
+    isDeposited: boolean;
 }
 
 export interface P2PTransferType {
@@ -49,4 +50,8 @@ export interface OffRampTransaction {
     provider: string
     status: string,
     timestamp: string, 
+}
+
+export interface TokenType {
+    token: string
 }

@@ -71,20 +71,26 @@ export default function SignIn() {
         sizes="100vw"
         className="w-32 h-auto mx-auto"
       />
-      <h1 className="text-lg">Login</h1>
+      <h1 className="text-lg">Sign in</h1>
 
       {!showPasswordStage && <>
         <InputBox onKeyDown={(e) => handleEnterKey(e, continueToPassword)} onChange={setPhoneNumber} type="text" placeholder="Enter Mobile Number" />
 
-        <button onClick={continueToPassword} className="rounded-full w-full bg-blue-500 text-white h-10">
+        <button onClick={continueToPassword} className="rounded-sm w-full bg-blue-500 text-white h-10">
           Next
         </button>
 
-        {/* <button
+        <div className='flex items-center'>
+          <div className='w-full h-[1pt] bg-gray-400'></div>
+          <div className='px-2 text-gray-500'>OR</div>
+          <div className='w-full h-[1pt] bg-gray-400'></div>
+        </div>
+
+        <button
           onClick={async () => {
             await handleSignIn('github');
           }}
-          className="relative rounded-full bg-black w-full  text-white h-10 mt-4">
+          className="relative rounded-sm bg-black w-full  text-white h-10">
           <div className='absolute top-2 left-10'>
             <Image
               src={"/github.jpg"}
@@ -99,11 +105,12 @@ export default function SignIn() {
             Sign in with GitHub
           </p>
         </button>
+        
         <button
           onClick={async () => {
             await handleSignIn('google');
           }}
-          className="relative rounded-full w-full bg-[#4c82e4] text-white h-10">
+          className="relative rounded-sm w-full bg-[#4c82e4] text-white h-10">
           <div className='absolute top-2 left-10 bg-white rounded-full p-1'>
             <Image
               src={"/google-logo.webp"}
@@ -117,7 +124,7 @@ export default function SignIn() {
           <p className='text-center'>
             Sign in with Google
           </p>
-        </button> */}
+        </button>
       </>}
 
       {showPasswordStage && <>
@@ -126,6 +133,7 @@ export default function SignIn() {
         <div className='flex flex-col items-start gap-2'>
           <div className='flex w-full relative'>
             <InputBox onChange={setPassword}
+              placeholder='Password'
               onKeyDown={(e) => handleEnterKey(e, () => handleSignIn('credentials'))}
               type={showPassword ? 'text' : 'password'} />
 
@@ -139,7 +147,7 @@ export default function SignIn() {
         <button
           value={'credentials'}
           onClick={() => handleSignIn('credentials')}
-          className="rounded-full w-full bg-blue-500 text-white h-10"
+          className="rounded-sm w-full bg-blue-500 text-white h-10"
         >
           Sign In
         </button>

@@ -24,17 +24,17 @@ export default function WithdrawlsTable({ withdrawalTransactions }: { withdrawal
       <tbody>
         {withdrawalTransactions && withdrawalTransactions.map((t) =>
           <tr key={t.id} className="bg-white">
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.provider}
             </td>
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.timestamp}
             </td>
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.status}
             </td>
-            <td className={`py-2 ${t.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-              {t.amount >= 0 ? '+' : '-'}{t.amount}
+            <td className={`py-2 ${t.status === 'Pending' ? 'text-yellow-500' : t.status === 'Success' ? 'text-green-500' : 'text-red-500'}  border-[1pt]`}>
+              +{t.amount}
             </td>
           </tr>)}
       </tbody>

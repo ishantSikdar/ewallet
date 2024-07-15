@@ -27,16 +27,16 @@ export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P
       <tbody>
         {p2pTransactions && p2pTransactions.map((t) =>
           <tr key={t.id} className="bg-white">
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.user.name}
             </td>
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.user.email}
             </td>
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.user.number}
             </td>
-            <td className="py-2">
+            <td className="py-2 border-[1pt]">
               {t.timestamp}
             </td>
             <td className={`py-2 ${t.isReceiver ? 'text-green-500' : 'text-red-500'}`}>
