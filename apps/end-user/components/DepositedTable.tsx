@@ -1,9 +1,9 @@
 import { OffRampTransaction, P2PTransferType } from "../lib/interfaces/TransactionBriefType";
 
-export default function WithdrawlsTable({ withdrawalTransactions }: { withdrawalTransactions: OffRampTransaction[] }) {
+export default function DepositedTable({ depositedTransactions }: { depositedTransactions: OffRampTransaction[] }) {
 
   return <div className="h-full bg-white rounded-md relative overflow-hidden shadow-md  ">
-    {withdrawalTransactions.length === 0 && <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">No Transactions</div>}
+    {depositedTransactions.length === 0 && <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">No Transactions</div>}
     <table className="w-full text-center overflow-auto">
       <thead>
         <tr className="w-full  text-white  bg-gray-800 ">
@@ -16,13 +16,13 @@ export default function WithdrawlsTable({ withdrawalTransactions }: { withdrawal
           <td className="py-2 border-r-[1pt] border-gray-400">
             Status
           </td>
-          <td className="py-2 rounded-tr-md">
+          <td className="py-2 rounded-tr-md ">
             Amount
           </td>
         </tr>
       </thead>
       <tbody>
-        {withdrawalTransactions && withdrawalTransactions.map((t) =>
+        {depositedTransactions && depositedTransactions.map((t) =>
           <tr key={t.id} className="bg-white">
             <td className="py-2">
               {t.provider}

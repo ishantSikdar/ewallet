@@ -11,7 +11,7 @@ export default async function NavBar() {
     redirect(ROUTE_SIGNIN);
   } else {
     return (
-      <div className="mt-10 w-full text-gray-500 flex flex-col gap-2 px-5">
+      <div className="mt-10 w-full text-black flex flex-col gap-2 px-5">
         <MenuItem iconKey={'Home'} label={'Home'} route={ROUTE_HOME} />
         <MenuItem iconKey={'Transfer'} label={'Transfer'} route={ROUTE_TRANSFER} />
         <MenuItem iconKey={'Transactions'} label={'Transactions'} route={ROUTE_TRANSACTIONS} />
