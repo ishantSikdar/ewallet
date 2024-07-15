@@ -7,16 +7,16 @@ export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P
     <table className="w-full text-center overflow-auto">
       <thead>
         <tr className="w-full  text-white  bg-gray-800 ">
-          <td className="py-2 rounded-tl-md">
+          <td className="py-2 rounded-tl-md border-r-[1pt] border-gray-400">
             Name
           </td>
-          <td className="py-2">
+          <td className="py-2 border-r-[1pt] border-gray-400">
             Email
           </td>
-          <td className="py-2">
+          <td className="py-2 border-r-[1pt] border-gray-400">
             Number
           </td>
-          <td className="py-2">
+          <td className="py-2 border-r-[1pt] border-gray-400">
             Time
           </td>
           <td className="py-2 rounded-tr-md">

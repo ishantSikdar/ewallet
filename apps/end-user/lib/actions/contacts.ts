@@ -1,11 +1,10 @@
 'use server'
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
+import { getUserServerSession } from "./session";
 
 export async function getUserContacts() {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     const userContacts = await prisma.contact.findMany({
         where: {

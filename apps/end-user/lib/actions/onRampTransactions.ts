@@ -1,17 +1,17 @@
 'use server'
 
-import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
 import axios from "axios";
 import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
+import { getUserServerSession } from "./session";
 
 interface TokenType {
     token: string
 }
 
 export async function createOnRampTransaction(amount: number, provider: string) {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`);
     const newToken = newTokenResponse.data.token;
@@ -34,7 +34,7 @@ export async function createOnRampTransaction(amount: number, provider: string) 
 }
 
 export async function getRecentOnRampTransactions() {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     const recentTransactions = await prisma.onRampTransaction.findMany({
         where: {

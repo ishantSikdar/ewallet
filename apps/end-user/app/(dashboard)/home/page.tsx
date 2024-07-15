@@ -2,13 +2,12 @@ import WhiteCard from "@repo/ui/WhiteCard";
 import UserPortfolio from "../../../components/UserPortfolio";
 import { getUserBalanceOvertime } from "../../../lib/actions/userBalance";
 import { getIST } from '@repo/common/date';
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../../lib/auth/auth";
+import { getUserServerSession } from "../../../lib/actions/session";
 
 export default async function Home() {
   const [userBalance, session] = await Promise.all([
     getUserBalanceOvertime(),
-    getServerSession(authOptions)
+    getUserServerSession()
   ]);
   
 
@@ -29,7 +28,7 @@ export default async function Home() {
   }
 
   return <div className="w-full h-full p-5">
-    <h2 className="text-3xl text-purple-900 font-bold p-5">{greet}{session?.user.name}</h2>
+    <h2 className="text-3xl text-gray-800 font-bold p-5">{greet}{session?.user.name}</h2>
     <WhiteCard className="">
       <div className="mb-5 ms-2 ">
         <h2 className="font-medium text-sm text-gray600">Balance</h2>

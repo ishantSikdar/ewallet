@@ -12,7 +12,13 @@ export async function getUserServerSession() {
     if (!session?.user) {
         await signOut();
         redirect(ROUTE_SIGNIN);
+        
     } else {
         return session;
     }
+}
+
+export async function signOutAndSendToLoginPage() {
+    await signOut();
+    redirect(ROUTE_SIGNIN)
 }

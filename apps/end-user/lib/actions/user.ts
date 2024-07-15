@@ -1,15 +1,12 @@
 'use server'
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
-import { redirect } from "next/navigation";
-import { ROUTE_SIGNIN } from "../../constants/routes";
 import { SplashType } from "../interfaces/TransactionBriefType";
+import { getUserServerSession, signOutAndSendToLoginPage } from "./session";
 
 
 export async function splash(): Promise<SplashType | null> {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     const user = await prisma.user.findFirst({
         where: {
@@ -18,7 +15,8 @@ export async function splash(): Promise<SplashType | null> {
     });
 
     if (!user) {
-        redirect(ROUTE_SIGNIN);
+        await signOutAndSendToLoginPage();
+        return null;
     }
 
     return {
@@ -30,7 +28,7 @@ export async function splash(): Promise<SplashType | null> {
 }
 
 export async function updateUserInit(name: string, email: string, number: string) {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     await prisma.user.update({
         where: { id: Number(session?.user.id) },

@@ -1,14 +1,10 @@
 'use server'
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
-import { redirect } from "next/navigation";
-import { ROUTE_SIGNIN } from "../../constants/routes";
 import { getUserServerSession } from "./session";
 
 export async function getUserBalance() {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     const userBalance = await prisma.balance.findFirst({
         where: {
@@ -31,7 +27,7 @@ export async function getUserBalance() {
 }
 
 export async function getUserBalanceOvertime() {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
 
     return await prisma.balance.findMany({
         where: { userId: Number(session?.user.id) },
@@ -45,12 +41,8 @@ export async function getUserBalanceOvertime() {
 }
 
 export async function sendMoneyToUser(number: string, amount: number) {
-    const session = await getServerSession(authOptions);
+    const session = await getUserServerSession();
     const senderId = Number(session?.user.id);
-
-    if (!senderId) {
-        redirect(ROUTE_SIGNIN);
-    }
 
     // start transaction
     await prisma.$transaction(async (tx) => {
@@ -142,11 +134,7 @@ export async function sendMoneyToUser(number: string, amount: number) {
 }
 
 export async function getP2PTransactions() {
-    const session = await getServerSession(authOptions);
-
-    if (!session?.user.id) {
-        redirect(ROUTE_SIGNIN);
-    }
+    const session = await getUserServerSession();
 
     const userId = Number(session.user.id);
 
