@@ -1,5 +1,6 @@
 import AppBar from "../../components/AppBar"
 import NavBar from "../../components/NavBar"
+import SplashWrapper from "../../components/SplashWrapper";
 import { AppProviders } from "./providers";
 
 export default function AppLayout({
@@ -7,7 +8,7 @@ export default function AppLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <AppProviders>
+  return <SplashWrapper>
     <div className="h-screen min-w-[1000px]">
       <AppBar />
       <div className="flex pt-16 h-full">
@@ -19,5 +20,5 @@ export default function AppLayout({
         </div>
       </div>
     </div>
-  </AppProviders>
+  </SplashWrapper>
 }

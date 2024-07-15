@@ -1,34 +1,21 @@
-'use client'
-
-import { useUserState } from '@repo/store/useUser';
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { splash } from '../lib/actions/user';
 import EditUserPage from './EditUserPage';
 
-export default function SplashWrapper({ children }: { children: ReactNode }) {
-  const [userState, setUserState] = useUserState();
+export default async function SplashWrapper({ children }: { children: ReactNode }) {
+  const userState = await splash();
 
-  useEffect(() => {
-    async function getUserState() {
-      const userStateResponse = await splash();
+  const user = {
+    name: userState?.name || '',
+    email: userState?.email || '',
+    number: userState?.number || '',
+    isReady: userState?.isReady || false,
+    lockEmail: !!userState?.email || false,
+    lockNumber: !!userState?.number || false,
+  }
 
-      if (userStateResponse) {
-        setUserState((p) => ({
-          email: userStateResponse.email || '',
-          isReady: userStateResponse.isReady,
-          name: userStateResponse.name || '',
-          number: userStateResponse.number || '',
-          lockEmail: !!userStateResponse.email,
-          lockNumber: !!userStateResponse.number
-        }));
-      }
-    }
-
-    getUserState();
-  }, []);
-  
   return <>
-    {userState.isReady === false && <EditUserPage />}
+    {userState?.isReady === false && <EditUserPage userState={user} />}
     {children}
   </>
 }

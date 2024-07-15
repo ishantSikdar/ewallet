@@ -1,6 +1,5 @@
 'use client'
 
-import { useUserState } from '@repo/store/useUser'
 import { Button } from '@repo/ui/Button'
 import CenterOverlay from '@repo/ui/CenterOverlay'
 import IconRegistry from '@repo/ui/Icons'
@@ -10,22 +9,35 @@ import { useState } from 'react'
 import { useRouter } from 'next-nprogress-bar'
 import { ROUTE_SIGNIN } from '../constants/routes'
 
-export default function EditUserPage() {
+interface UserState {
+  name: string;
+  email: string | null;
+  number: string | null;
+  isReady: boolean;
+  lockEmail: boolean;
+  lockNumber: boolean;
+}
+
+export default function EditUserPage({ userState }: { userState: UserState }) {
   const router = useRouter();
-  const [userState, setUserState] = useUserState();
+
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [number, setNumber] = useState<string>('');
+
   const [success, setSuccess] = useState<boolean>(false);
   const LockIcon = IconRegistry['Lock'];
 
   const handleUserUpdate = async () => {
-    const response = await updateUserInit(userState.name, userState.email, userState.number);
+    const response = await updateUserInit(
+      name,
+      userState.email ? userState.email : email,
+      userState.number ? userState.number : number
+    );
     setSuccess(true);
   }
 
   const goToSignInPage = () => {
-    setUserState((p) => ({
-      ...p,
-      isReady: true
-    }));
     router.push(ROUTE_SIGNIN);
   }
 
@@ -39,10 +51,7 @@ export default function EditUserPage() {
             <InputBox
               placeholder={userState.name ? userState.name : 'John Doe'}
               type='text'
-              onChange={(name) => setUserState((p) => ({
-                ...p,
-                name: name
-              }))}
+              onChange={setName}
             />
           </div>
           <div>
@@ -52,10 +61,7 @@ export default function EditUserPage() {
                 lock={userState.lockEmail}
                 placeholder={userState.email ? userState.email : 'johndoe@mail.com'}
                 type='text'
-                onChange={(email) => setUserState((p) => ({
-                  ...p,
-                  email: email
-                }))}
+                onChange={setEmail}
               />
               <div className='absolute top-2 right-4'>
                 {userState.lockEmail && LockIcon && <LockIcon color={"#6a7382"} />}
@@ -69,10 +75,7 @@ export default function EditUserPage() {
                 lock={userState.lockNumber}
                 placeholder={userState.number ? userState.number : '0000000000'}
                 type='text'
-                onChange={(number) => setUserState((p) => ({
-                  ...p,
-                  number: number
-                }))}
+                onChange={setNumber}
               />
               <div className='absolute top-2 right-4'>
                 {userState.lockNumber && LockIcon && <LockIcon color={"#6a7382"} />}
