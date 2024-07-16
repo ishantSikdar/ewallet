@@ -39,7 +39,7 @@ export default function EditUserPage({ userState }: { userState: UserState }) {
   const goToSignInPage = () => {
     signOut({
       callbackUrl: ROUTE_SIGNIN
-    })
+    });
   }
 
   return <CenterOverlay>
