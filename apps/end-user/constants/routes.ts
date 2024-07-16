@@ -1,5 +1,6 @@
 export const ROUTE_SIGNIN = "/signin";
 export const ROUTE_HOME = "/home";
+export const ROUTE_EDIT_USER_INIT = "/user-init";
 export const ROUTE_TRANSFER = "/transfer";
 export const ROUTE_TRANSFER_WITHDRAW = "/transfer/withdraw";
 export const ROUTE_TRANSFER_DEPOSIT = "/transfer/deposit";
