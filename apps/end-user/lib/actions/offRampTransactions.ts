@@ -5,6 +5,7 @@ import { getUserServerSession } from "./session";
 import axios from "axios";
 import { TokenType } from "../interfaces/TransactionBriefType";
 import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
+import { url } from "inspector";
 
 export async function getRecentOffRampTransactions() {
     const session = await getUserServerSession();
@@ -45,7 +46,15 @@ export async function getRecentOffRampTransactions() {
 export async function createOffRampTransaction(amount: number, provider: string) {
     const session = await getUserServerSession();
 
-    const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`);
+    const newTokenResponse = await axios.post<TokenType>(
+        `${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`,
+        JSON.stringify({
+            amount: amount * 100,
+            userId: Number(session?.user.id),
+            isDeposit: true,
+        }), {
+        headers: { "Content-Type": "application/json" }
+    });
     const newToken = newTokenResponse.data.token;
 
     const offRampTransaction = await prisma.$transaction(async (tx) => {
@@ -67,7 +76,7 @@ export async function createOffRampTransaction(amount: number, provider: string)
                 data: {
                     amount: amount * 100,
                     provider: provider,
-                    status: "Pending",
+                    status: newTokenResponse.status === 200 ? 'Pending' : 'Failure',
                     token: newToken,
                     userId: Number(session?.user.id),
                 }
@@ -76,6 +85,7 @@ export async function createOffRampTransaction(amount: number, provider: string)
     });
 
     return {
+        url: newTokenResponse.data.url,
         transactionId: offRampTransaction?.id,
         message: "Done"
     }

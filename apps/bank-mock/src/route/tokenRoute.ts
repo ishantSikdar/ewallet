@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { generateToken } from "../controller/tokenController";
-import { SUB_ROUTE_GENERATE } from "@repo/common/route";
+import { ewalletRequestSuccess, generateToken } from "../controller/eWalletReqController";
+import { SUB_ROUTE_GENERATE, SUB_ROUTE_TRANSACTION_SUCCESS } from "@repo/common/route";
 
-const tokenRouter = Router();
+const ewalletReqRouter = Router();
 
-tokenRouter.post(SUB_ROUTE_GENERATE, generateToken);
+ewalletReqRouter.post(SUB_ROUTE_GENERATE, generateToken);
+ewalletReqRouter.post(SUB_ROUTE_TRANSACTION_SUCCESS, ewalletRequestSuccess)
 
-export default tokenRouter;
+export default ewalletReqRouter;

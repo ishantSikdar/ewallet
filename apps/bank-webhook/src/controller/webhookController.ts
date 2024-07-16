@@ -11,6 +11,8 @@ export const withdrawUserBalance = async (req: Request, res: Response) => {
         amount: Number(req.body.amount),
     }
 
+    console.log("withdraw payment info:", paymentInfo);
+
     try {
         await prisma.$transaction(async (tx) => {
             const balanceLockQuery = `SELECT * FROM "Balance" WHERE "userId"='${paymentInfo.userId}'`;
@@ -75,6 +77,7 @@ export const depositUserBalance = async (req: Request, res: Response) => {
         userId: Number(req.body.userId),
         amount: Number(req.body.amount),
     }
+    console.log("deposit payment info:", paymentInfo);
 
     try {
         await prisma.$transaction(async (tx) => {

@@ -1,6 +1,5 @@
 'use server'
 
-import { authOptions } from "../auth/auth";
 import prisma from "@repo/db/client";
 import axios from "axios";
 import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
@@ -11,21 +10,29 @@ import { TokenType } from "../interfaces/TransactionBriefType";
 export async function createOnRampTransaction(amount: number, provider: string) {
     const session = await getUserServerSession();
 
-    const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`);
-    const newToken = newTokenResponse.data.token;
+    const newTokenResponse = await axios.post<TokenType>(
+        `${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`,
+        JSON.stringify({
+            amount: amount * 100,
+            userId: Number(session?.user.id),
+            isDeposit: false,
+        }), {
+        headers: { "Content-Type": "application/json" }
+    });
 
+    const newToken = newTokenResponse.data.token;
     const transaction = await prisma.onRampTransaction.create({
         data: {
             amount: amount * 100,
             provider: provider,
-            status: 'Pending',
-            timestamp: new Date(),
+            status: newTokenResponse.status === 200 ? 'Pending' : 'Failure',
             token: newToken,
             userId: Number(session?.user.id),
         },
     });
 
     return {
+        url: newTokenResponse.data.url,
         transactionId: transaction.id,
         message: "Done"
     }

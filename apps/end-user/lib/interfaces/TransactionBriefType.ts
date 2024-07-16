@@ -53,5 +53,6 @@ export interface OffRampTransaction {
 }
 
 export interface TokenType {
-    token: string
+    token: string, 
+    url: string,
 }

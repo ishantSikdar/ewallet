@@ -20,8 +20,8 @@ export default function DepositMoney() {
   const [amount, setAmount] = useState<string>('');
 
   const handleDepositMoney = async () => {
-    await createOffRampTransaction(Number(amount), provider);
-    window.open(redirectUrl, '_blank');
+    const { url } = await createOffRampTransaction(Number(amount), provider);
+    window.open(url, '_blank');
   }
 
   return <>

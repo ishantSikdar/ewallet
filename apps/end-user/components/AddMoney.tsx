@@ -20,8 +20,8 @@ export default function AddMoney() {
   const [amount, setAmount] = useState<string>('');
 
   const handleAddMoney = async () => {
-    await createOnRampTransaction(Number(amount), provider);
-    window.open(redirectUrl, '_blank');
+    const { url } = await createOnRampTransaction(Number(amount), provider);
+    window.open(url, '_blank');
   }
 
   return <>
