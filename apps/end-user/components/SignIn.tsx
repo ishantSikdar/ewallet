@@ -90,7 +90,7 @@ export default function SignIn() {
           <div className='w-full h-[1pt] bg-gray-400'></div>
         </div>
 
-        <button
+        {/* <button
           onClick={() => handleOAuthSignIn('github')}
           className="relative rounded-sm bg-black w-full  text-white h-10">
           <div className='absolute top-2 left-10'>
@@ -106,7 +106,7 @@ export default function SignIn() {
           <p className='text-center'>
             Sign in with GitHub
           </p>
-        </button>
+        </button> */}
 
         <button
           onClick={() => handleOAuthSignIn('google')}

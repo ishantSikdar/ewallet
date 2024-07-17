@@ -10,14 +10,15 @@ import { CredentialsType } from "../interfaces/TransactionBriefType";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
+import GithubProvider from "next-auth/providers/github";
+import { preloadFont } from "next/dist/server/app-render/entry-base";
 
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
-                phone: { label: "Email or Mobile Number", type: "text", placeholder: "0000000000" },
+                phone: { label: "Mobile Number", type: "text", placeholder: "0000000000" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials: CredentialsType | undefined): Promise<User | null> {
@@ -28,10 +29,8 @@ export const authOptions: NextAuthOptions = {
 
                     const existingUser = await db.user.findFirst({
                         where: {
-                            OR: [
-                                { number: credentials.phone },
-                                { email: credentials.phone }
-                            ]
+                            number: credentials.phone,
+                            authProvider: "Credentials",
                         }
                     });
 
@@ -94,10 +93,12 @@ export const authOptions: NextAuthOptions = {
             clientId: process.env.GOOGLE_ID || '',
             clientSecret: process.env.GOOGLE_SECRET || ''
         }),
-        GitHubProvider({
+
+        GithubProvider({
             clientId: process.env.GITHUB_ID || '',
-            clientSecret: process.env.GITHUB_SECRET || ''
-        })
+            clientSecret: process.env.GITHUB_SECRET || '',
+            authorization: { params: { scope: 'repo read:user user:email' } }
+        }),
     ],
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
@@ -118,11 +119,63 @@ export const authOptions: NextAuthOptions = {
                 session.user.image = token.picture;
             }
 
-            console.log(`auth session`, session);
-            console.log(`auth token`, token);
             return session;
         },
-        
+        async signIn({ user, account, profile, email, credentials }) {
+
+            if (['google', 'github'].includes(account?.provider as string)) {
+
+                if (user.email) {
+                    console.log(account?.provider);
+                    // search for existing user
+                    const existingUser = await db.user.findFirst({
+                        where: {
+                            email: user.email,
+                        }
+                    });
+
+                    if (existingUser) {
+                        user.id = existingUser.id.toString();
+                        user.name = existingUser.name;
+                        user.number = existingUser.number;
+                        user.image = existingUser.color;
+                        console.log("User existing", user);
+                        return true;
+
+                    } else {
+                        const newUser = await db.user.create({
+                            data: {
+                                email: user.email,
+                                name: user.name,
+                                color: getRandom(colors),
+                                authProvider: account?.provider === 'google' ? 'Google' : 'Github',
+                                Balance: {
+                                    create: {
+                                        locked: 0,
+                                        totalBalance: 0,
+                                        transactionAmt: 0
+                                    }
+                                }
+                            }
+                        });
+
+                        user.id = newUser.id.toString();
+                        user.image = newUser.color;
+                        console.log("User new", user);
+                        return true;
+                    }
+
+                } else {
+                    return false;
+                }
+
+            } else if (account?.provider === 'credentials') {
+                console.log("Using credentials")
+                return true;
+            }
+
+            return false;
+        }
     },
     pages: {
         signIn: '/signin',
