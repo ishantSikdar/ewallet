@@ -10,6 +10,10 @@ Here, I tried to spoof the external bank softwares, i.e, they mimicks like a ban
 
 ![alt text](docs/architecture.png)
 
+### End User to Bank Communication
+
+![alt text](docs/end-user-to-bank.png)
+
 ### Features
 
   - Add balance into Wallet (Withdraw)
@@ -23,6 +27,12 @@ Here, I tried to spoof the external bank softwares, i.e, they mimicks like a ban
   - P2P Wallet balance transfer
   
     ![alt text](docs/P2PArchitecture.png)
+
+### Login Flow
+
+![alt text](docs/login-flow.png)
+
+
 
 ### Schema
 
