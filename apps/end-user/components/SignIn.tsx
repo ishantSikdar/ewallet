@@ -7,7 +7,6 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import Notice from './Notice';
 import { InputBox } from '@repo/ui/InputBox';
-import { ROUTE_HOME } from '../constants/routes';
 
 export default function SignIn() {
   const router = useRouter();
@@ -28,23 +27,14 @@ export default function SignIn() {
     }
   };
 
-
-  const handleSignIn = async (provider: string) => {
+  const handleCredSignIn = async () => {
     try {
-      let res;
-      if (provider === 'credentials') {
-        res = await signIn(provider, {
-          phone: phoneNumber,
-          password: password,
-          redirect: false,
-        });
-
-      } else {
-        console.log("using oauth")
-        res = await signIn(provider, {
-          redirect: false
-        });
-      }
+      console.log("using creds")
+      const res = await signIn('credentials', {
+        phone: phoneNumber,
+        password: password,
+        redirect: false,
+      });
 
       if (res?.error) {
         console.error('Sign-in error', res.error);
@@ -54,6 +44,20 @@ export default function SignIn() {
         console.log("redirect to home")
         router.push('/');
       }
+    } catch (error) {
+      console.error(`Login error`, error);
+      setError(error instanceof Error ? error.message : 'Unknown Error Occured');
+    }
+  }
+
+
+  const handleOAuthSignIn = async (provider: string) => {
+    try {
+      console.log("using oauth")
+      const res = await signIn(provider, {
+        redirect: true,
+        callbackUrl: "/"
+      });
 
     } catch (error) {
       console.error(`Login error`, error);
@@ -87,9 +91,7 @@ export default function SignIn() {
         </div>
 
         <button
-          onClick={async () => {
-            await handleSignIn('github');
-          }}
+          onClick={() => handleOAuthSignIn('github')}
           className="relative rounded-sm bg-black w-full  text-white h-10">
           <div className='absolute top-2 left-10'>
             <Image
@@ -105,11 +107,9 @@ export default function SignIn() {
             Sign in with GitHub
           </p>
         </button>
-        
+
         <button
-          onClick={async () => {
-            await handleSignIn('google');
-          }}
+          onClick={() => handleOAuthSignIn('google')}
           className="relative rounded-sm w-full bg-[#4c82e4] text-white h-10">
           <div className='absolute top-2 left-10 bg-white rounded-full p-1'>
             <Image
@@ -134,7 +134,7 @@ export default function SignIn() {
           <div className='flex w-full relative'>
             <InputBox onChange={setPassword}
               placeholder='Password'
-              onKeyDown={(e) => handleEnterKey(e, () => handleSignIn('credentials'))}
+              onKeyDown={(e) => handleEnterKey(e, handleCredSignIn)}
               type={showPassword ? 'text' : 'password'} />
 
             <button onClick={() => setShowPassword(p => !p)} className='absolute text-gray-500 right-5 top-3'>
@@ -146,7 +146,7 @@ export default function SignIn() {
 
         <button
           value={'credentials'}
-          onClick={() => handleSignIn('credentials')}
+          onClick={handleCredSignIn}
           className="rounded-sm w-full bg-blue-500 text-white h-10"
         >
           Sign In

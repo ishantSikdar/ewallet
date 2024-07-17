@@ -6,6 +6,7 @@ import { ROUTE_EDIT_USER_INIT, ROUTE_HOME, ROUTE_SIGNIN } from "../constants/rou
 import { useEffect } from "react";
 import { useUserState } from '@repo/store/useUser';
 import { splash } from "../lib/actions/user";
+import { authOptions } from "../lib/auth/auth";
 
 export default function RootHome() {
   const router = useRouter();
@@ -31,16 +32,17 @@ export default function RootHome() {
   }
 
   useEffect(() => {
-    // Only perform redirection when session status is 'authenticated'
-    if (!session || !session.user) {
-      signOut({
-        callbackUrl: ROUTE_SIGNIN
-      });
-    } else {
-      getUserReadiness();
-
+    if (session !== undefined) {
+      console.log(`session`, session);
+      if (session === null) {
+        signOut({
+          callbackUrl: ROUTE_SIGNIN
+        });
+      } else {
+        getUserReadiness();
+      }
     }
-  }, []);
+  }, [session]);
 
   return <>
     Loading...

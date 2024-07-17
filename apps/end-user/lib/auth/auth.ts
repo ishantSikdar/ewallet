@@ -90,14 +90,14 @@ export const authOptions: NextAuthOptions = {
             }
         }),
 
-        // GoogleProvider({
-        //     clientId: process.env.GOOGLE_ID || '',
-        //     clientSecret: process.env.GOOGLE_SECRET || ''
-        // }),
-        // GitHubProvider({
-        //     clientId: process.env.GITHUB_ID || '',
-        //     clientSecret: process.env.GITHUB_SECRET || ''
-        // })
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID || '',
+            clientSecret: process.env.GOOGLE_SECRET || ''
+        }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID || '',
+            clientSecret: process.env.GITHUB_SECRET || ''
+        })
     ],
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
@@ -117,39 +117,12 @@ export const authOptions: NextAuthOptions = {
                 session.user.number = token.number;
                 session.user.image = token.picture;
             }
+
+            console.log(`auth session`, session);
+            console.log(`auth token`, token);
             return session;
         },
-        // async signIn({ user, account, profile, email, credentials }) {
-        //     if (['google', 'github'].includes(account?.provider as string)) {
-        //         console.log(`provider`, account?.provider);
-        //         const existingUser = await db.user.findFirst({
-        //             where: {
-        //                 email: profile?.email
-        //             },
-        //         });
-        //         console.log(`existingUser`, existingUser);
-
-        //         if (!existingUser) {
-        //             const newUser = await db.user.create({
-        //                 data: {
-        //                     email: profile?.email,
-        //                     name: profile?.name,
-        //                     color: getRandom(colors) || Color.CYAN,
-        //                     isReady: false,
-        //                     authProvider: account?.provider === 'google' ? "Google" : "Github",
-        //                     Balance: {
-        //                         create: {
-        //                             locked: 0,
-        //                             totalBalance: 0,
-        //                             transactionAmt: 0
-        //                         }
-        //                     }
-        //                 }
-        //             })
-        //         }
-        //     }
-        //     return true;
-        // }
+        
     },
     pages: {
         signIn: '/signin',
