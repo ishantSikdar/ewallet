@@ -43,10 +43,10 @@ export default function Amount({
   return <>
     <div className="text-sm">
       <p className="mb-1">Amount</p>
-      <InputBox value={(amount/100).toString()} type="text" placeholder="100" onChange={() => ''} lock={true} />
+      <InputBox value={(amount/100).toString()} className="h-10 w-full rounded-md bg-[#fbf7f6] p-2 text-sm border-b-2 outline-none" type="text" placeholder="100" onChange={() => ''} lock={true} />
     </div>
 
-    <Button onClick={handleTransaction} className="mt-auto">
+    <Button onClick={handleTransaction} className="mt-auto text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
       Continue
     </Button>
   </>

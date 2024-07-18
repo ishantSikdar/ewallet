@@ -2,7 +2,7 @@ import { OffRampTransaction, P2PTransferType } from "../lib/interfaces/Transacti
 
 export default function DepositedTable({ depositedTransactions }: { depositedTransactions: OffRampTransaction[] }) {
 
-  return <div className="h-full bg-white rounded-md relative overflow-hidden shadow-md  ">
+  return <div className="max-h-[500px] bg-white rounded-md relative overflow-y-scroll shadow-md  ">
     {depositedTransactions.length === 0 && <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">No Transactions</div>}
     <table className="w-full text-center overflow-auto">
       <thead>
