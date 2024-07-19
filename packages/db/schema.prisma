@@ -42,7 +42,7 @@
   model OnRampTransaction {
     id        Int          @id @default(autoincrement())
     status    RampStatus
-    token     String       @unique
+    token     String?       @unique
     provider  String
     amount    Int
     timestamp DateTime     @default(now())
@@ -53,7 +53,7 @@
   model OffRampTransaction {
     id        Int          @id @default(autoincrement())
     status    RampStatus
-    token     String       @unique
+    token     String?       @unique
     provider  String
     amount    Int
     timestamp DateTime     @default(now())

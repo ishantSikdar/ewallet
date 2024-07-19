@@ -12,7 +12,6 @@ export default function Transaction() {
   const token = searchParams.get('token') as string;
   const isDeposit = searchParams.get('d') === 'true';
 
-
   return <div className="w-full h-screen bg-soft-white flex justify-center items-center relative">
     <div className="p-10 w-96 min-h-[330px] shadow-xl bg-white border-gray-300 rounded-lg flex flex-col gap-4 relative">
       <h1 className="text-xl font-bold border-b-2 pb-2">Net Banking</h1>
