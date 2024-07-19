@@ -12,20 +12,6 @@ app.use(cors({
 
 app.use(ROUTE_TOKEN, ewalletReqRouter);
 
-app.get("/test", (req: Request, res: Response) => {
-    const endUser = process.env.END_USER_BASE_URL;
-    const bankMock = process.env.BANK_MOCK_BASE_URL;
-    const bankInterface = process.env.BANK_INTERFACE_BASE_URL;
-    const bankWebhook = process.env.BANK_WEBHOOK_BASE_URL;
-
-    res.json({
-        endUser,
-        bankInterface,
-        bankMock,
-        bankWebhook
-    });
-})
-
 app.listen(8081, () => {
     console.log("Listening to PORT", 8081);
 });

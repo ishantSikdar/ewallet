@@ -4,7 +4,6 @@ import Transaction from "./components/Transaction";
 
 function App() {
 
-
   return (
     <BrowserRouter>
       <Routes>

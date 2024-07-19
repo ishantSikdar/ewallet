@@ -9,7 +9,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
         "END_USER_BASE_URL",
@@ -23,9 +23,14 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
+      "env": [
+        "END_USER_BASE_URL",
+        "BANK_WEBHOOK_BASE_URL",
+        "BANK_INTERFACE_BASE_URL",
+        "BANK_MOCK_BASE_URL"
+      ]
     }
-  },
-  "globalDependencies": [".env"], 
-  "inputs": [".env"]
+  }
 }
