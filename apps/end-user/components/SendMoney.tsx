@@ -5,7 +5,7 @@ import { InputBox } from "@repo/ui/InputBox";
 import { useEffect, useState } from "react";
 import { sendMoneyToUser } from "../lib/actions/userBalance";
 import Notice from "./Notice";
-import { UserPublicType } from "../lib/interfaces/TransactionBriefType";
+import { UserPublicType } from "../lib/interfaces/common";
 import { getUserByNumber } from "../lib/actions/user";
 import ContactCard from "./ContactCard";
 import { useSendMoneyInputState } from "@repo/store/useApp";

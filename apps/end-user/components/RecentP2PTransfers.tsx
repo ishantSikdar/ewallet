@@ -1,4 +1,4 @@
-import { P2PTransferType } from "../lib/interfaces/TransactionBriefType";
+import { P2PTransferType } from "../lib/interfaces/common";
 import P2PTransferBrief from "./P2PTransferBrief";
 
 export default function RecentP2PTransfer({ transfers }: { transfers: P2PTransferType[] }) {

@@ -1,4 +1,4 @@
-import { OffRampTransaction, P2PTransferType } from "../lib/interfaces/TransactionBriefType";
+import { OffRampTransaction, P2PTransferType } from "../lib/interfaces/common";
 
 export default function DepositedTable({ depositedTransactions }: { depositedTransactions: OffRampTransaction[] }) {
 

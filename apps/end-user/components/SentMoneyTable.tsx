@@ -1,4 +1,4 @@
-import { P2PTransferType } from "../lib/interfaces/TransactionBriefType";
+import { P2PTransferType } from "../lib/interfaces/common";
 
 export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P2PTransferType[] }) {
 

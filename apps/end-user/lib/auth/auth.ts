@@ -6,7 +6,7 @@ import { JWT } from "next-auth/jwt";
 import { isEmailThenReturn, isMobileThenReturn } from "@repo/common/string";
 import { Color, colors } from '@repo/common/color';
 import { getRandom } from '@repo/common/array';
-import { CredentialsType } from "../interfaces/TransactionBriefType";
+import { CredentialsType } from "../interfaces/common";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";

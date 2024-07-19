@@ -5,6 +5,7 @@ import { Select } from "@repo/ui/Select";
 import { useState } from "react";
 import { InputBox } from "@repo/ui/InputBox";
 import { createOffRampTransaction } from "../lib/actions/offRampTransactions";
+import Notice from "./Notice";
 
 const SUPPORTED_BANKS = [{
   name: "HDFC Bank",
@@ -18,10 +19,15 @@ export default function DepositMoney() {
   const [redirectUrl, setRedirectUrl] = useState<string>(SUPPORTED_BANKS[0]?.redirectUrl || '');
   const [provider, setProvider] = useState<string>(SUPPORTED_BANKS[0]?.name || '');
   const [amount, setAmount] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleDepositMoney = async () => {
     const { url } = await createOffRampTransaction(Number(amount), provider);
-    window.open(url, '_blank');
+    if (url) {
+      window.open(url, '_blank');
+    } else {
+      setError("Bank server is down");
+    }
   }
 
   return <>
@@ -48,5 +54,6 @@ export default function DepositMoney() {
         </Button>
       </div>
     </div>
+    {error && <Notice closeCallback={() => setError('')} colorCode={0} text={error} />}
   </>
 }

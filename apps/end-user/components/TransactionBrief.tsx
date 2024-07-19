@@ -1,6 +1,6 @@
 'use client'
 
-import { TransactionsBriefType } from "../lib/interfaces/TransactionBriefType"
+import { TransactionsBriefType } from "../lib/interfaces/common"
 
 export default function TransactionBrief({ amount, status, timestamp, isDeposited }: TransactionsBriefType) {
   let headline: string = '';

@@ -1,4 +1,4 @@
-import { ContactType } from "../lib/interfaces/TransactionBriefType";
+import { ContactType } from "../lib/interfaces/common";
 import ProfilePicture from "./ProfilePicture";
 
 export default function ContactCard({ number, name, id, color }: ContactType) {

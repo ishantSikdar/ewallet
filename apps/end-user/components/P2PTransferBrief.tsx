@@ -1,6 +1,6 @@
 'use client'
 
-import { P2PTransferType } from "../lib/interfaces/TransactionBriefType"
+import { P2PTransferType } from "../lib/interfaces/common"
 
 export default function P2PTransferBrief({ amount, timestamp, user, isReceiver }: P2PTransferType) {
   let balance = isReceiver ? `+${(amount / 100).toFixed(2)}` : `-${(amount / 100).toFixed(2)}`;

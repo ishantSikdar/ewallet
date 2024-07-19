@@ -5,6 +5,7 @@ import { Select } from "@repo/ui/Select";
 import { useState } from "react";
 import { createOnRampTransaction } from "../lib/actions/onRampTransactions";
 import { InputBox } from "@repo/ui/InputBox";
+import Notice from "./Notice";
 
 const SUPPORTED_BANKS = [{
   name: "HDFC Bank",
@@ -18,10 +19,16 @@ export default function AddMoney() {
   const [redirectUrl, setRedirectUrl] = useState<string>(SUPPORTED_BANKS[0]?.redirectUrl || '');
   const [provider, setProvider] = useState<string>(SUPPORTED_BANKS[0]?.name || '');
   const [amount, setAmount] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleAddMoney = async () => {
     const { url } = await createOnRampTransaction(Number(amount), provider);
-    window.open(url, '_blank');
+
+    if (url) {
+      window.open(url, '_blank');
+    } else {
+      setError("Bank server is down");
+    }
   }
 
   return <>
@@ -48,5 +55,6 @@ export default function AddMoney() {
         </Button>
       </div>
     </div>
+    {error && <Notice closeCallback={() => setError('')} colorCode={0} text={error} />}
   </>
 }

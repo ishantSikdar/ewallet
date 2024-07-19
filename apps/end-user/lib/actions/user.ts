@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from "@repo/db/client";
-import { SplashType } from "../interfaces/TransactionBriefType";
+import { SplashType } from "../interfaces/common";
 import { getUserServerSession, signOutAndSendToLoginPage } from "./session";
 
 

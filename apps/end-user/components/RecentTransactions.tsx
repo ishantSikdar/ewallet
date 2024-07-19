@@ -1,4 +1,4 @@
-import { OffRampTransaction } from "../lib/interfaces/TransactionBriefType";
+import { OffRampTransaction } from "../lib/interfaces/common";
 import TransactionBrief from "./TransactionBrief";
 
 export default async function RecentTransactions({ transactions, isDeposit }: { transactions : OffRampTransaction[], isDeposit: boolean }) {

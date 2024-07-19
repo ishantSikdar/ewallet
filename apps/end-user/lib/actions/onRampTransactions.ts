@@ -4,37 +4,62 @@ import prisma from "@repo/db/client";
 import axios from "axios";
 import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
 import { getUserServerSession } from "./session";
-import { TokenType } from "../interfaces/TransactionBriefType";
+import { TokenType } from "../interfaces/common";
 
 
 export async function createOnRampTransaction(amount: number, provider: string) {
     const session = await getUserServerSession();
 
-    const newTokenResponse = await axios.post<TokenType>(
-        `${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`,
+    try {
+        const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`, 
         JSON.stringify({
             amount: amount * 100,
             userId: Number(session?.user.id),
             isDeposit: false,
         }), {
-        headers: { "Content-Type": "application/json" }
-    });
+            headers: { "Content-Type": "application/json" }
+        });
 
-    const newToken = newTokenResponse.data.token;
-    const transaction = await prisma.onRampTransaction.create({
-        data: {
-            amount: amount * 100,
-            provider: provider,
-            status: newTokenResponse.status === 200 ? 'Pending' : 'Failure',
-            token: newToken,
-            userId: Number(session?.user.id),
-        },
-    });
+        const newToken = newTokenResponse.data.token;
+        const transaction = await prisma.onRampTransaction.create({
+            data: {
+                amount: amount * 100,
+                provider: provider,
+                status: newTokenResponse.status === 200 ? 'Pending' : 'Failure',
+                token: newToken,
+                userId: Number(session?.user.id),
+            },
+        });
 
-    return {
-        url: newTokenResponse.data.url,
-        transactionId: transaction.id,
-        message: "Done"
+        return {
+            url: newTokenResponse.data.url,
+            transactionId: transaction.id,
+            message: "Done"
+        };
+    } catch (error: any) {
+        console.error("Error creating on-ramp transaction:", error);
+
+        if (error.code === 'ECONNREFUSED') {
+            // Handle connection refused error specifically
+            const transaction = await prisma.onRampTransaction.create({
+                data: {
+                    amount: amount * 100,
+                    provider: provider,
+                    status: 'Failure',
+                    token: null,
+                    userId: Number(session?.user.id),
+                },
+            });
+
+            return {
+                url: null,
+                transactionId: transaction.id,
+                message: "Failed to connect to the bank service"
+            };
+        }
+
+        // Handle other possible errors
+        throw error;
     }
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { ContactType } from "../lib/interfaces/TransactionBriefType";
+import { ContactType } from "../lib/interfaces/common";
 import ContactCard from "./ContactCard";
 import { useSetSendMoneyInputState } from '@repo/store/useApp';
 
