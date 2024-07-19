@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Transaction() {
   const [stage, setStage] = useBankAppStageState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const amount = parseInt(searchParams.get("f") ?? '0');
   const user = parseInt(searchParams.get("sub") ?? '0');
   const token = searchParams.get('token') as string;
