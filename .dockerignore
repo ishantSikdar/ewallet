@@ -1,0 +1,12 @@
+# Skip all .env files in any directory
+**/.env*
+
+# Skip all .gitignore files in any directory
+**/.gitignore
+
+# Skip node_modules directory
+**/node_modules
+
+# Skip build and dist directories
+**/dist
+**/build

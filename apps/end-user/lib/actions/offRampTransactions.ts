@@ -4,7 +4,7 @@ import prisma from "@repo/db/client";
 import { getUserServerSession } from "./session";
 import axios from "axios";
 import { TokenType } from "../interfaces/common";
-import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
+import { ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
 
 export async function getRecentOffRampTransactions() {
     const session = await getUserServerSession();
@@ -45,7 +45,7 @@ export async function createOffRampTransaction(amount: number, provider: string)
     const session = await getUserServerSession();
 
     try {
-        const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`, 
+        const newTokenResponse = await axios.post<TokenType>(`${process.env.BANK_MOCK_BASE_URL}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`, 
         JSON.stringify({
             amount: amount * 100,
             userId: Number(session?.user.id),

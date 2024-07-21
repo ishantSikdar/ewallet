@@ -2,7 +2,7 @@
 
 import prisma from "@repo/db/client";
 import axios from "axios";
-import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
+import { ROUTE_TOKEN, SUB_ROUTE_GENERATE } from "@repo/common/route";
 import { getUserServerSession } from "./session";
 import { TokenType } from "../interfaces/common";
 
@@ -11,7 +11,7 @@ export async function createOnRampTransaction(amount: number, provider: string) 
     const session = await getUserServerSession();
 
     try {
-        const newTokenResponse = await axios.post<TokenType>(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`, 
+        const newTokenResponse = await axios.post<TokenType>(`${process.env.BANK_MOCK_BASE_URL}${ROUTE_TOKEN}${SUB_ROUTE_GENERATE}`, 
         JSON.stringify({
             amount: amount * 100,
             userId: Number(session?.user.id),
