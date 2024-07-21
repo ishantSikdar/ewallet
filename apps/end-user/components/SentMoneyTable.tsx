@@ -2,7 +2,7 @@ import { P2PTransferType } from "../lib/interfaces/common";
 
 export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P2PTransferType[] }) {
 
-  return <div className="max-h-[500px] bg-white rounded-md relative overflow-y-scroll shadow-md  ">
+  return <div className="max-h-[500px] bg-white text-sm rounded-md relative overflow-y-scroll shadow-md  ">
     {p2pTransactions.length === 0 && <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">No Transactions</div>}
     <table className="w-full text-center overflow-auto">
       <thead>

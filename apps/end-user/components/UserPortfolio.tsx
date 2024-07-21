@@ -50,14 +50,14 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
           totalBalance: ub.totalBalance // Include transactionAmt in each data point
         })),
         borderColor: "#202938",
-        borderWidth: 2,
+        borderWidth: 1,
         pointBorderColor: "#202938",
         pointBorderWidth: 1,
         tension: 0,
-        fill: false,
+        fill: true,
         backgroundColor: (context: any) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+          const gradient = ctx.createLinearGradient(0, 0, 0, 160);
           gradient.addColorStop(0, "#202938");
           gradient.addColorStop(1, "white");
           return gradient;

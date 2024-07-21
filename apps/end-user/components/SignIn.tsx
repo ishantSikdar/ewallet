@@ -7,11 +7,9 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import Notice from './Notice';
 import { InputBox } from '@repo/ui/InputBox';
-import { BANK_INTERFACE_BASE, BANK_MOCK_BASE, BANK_WEBHOOK_BASE, END_USER_BASE } from "@repo/common/route";
 
 
 export default function SignIn() {
-  console.log("env", BANK_WEBHOOK_BASE, BANK_INTERFACE_BASE, BANK_MOCK_BASE, END_USER_BASE);
   
   const router = useRouter();
   const [showPasswordStage, setShowPasswordStage] = useState<boolean>(false);
