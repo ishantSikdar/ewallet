@@ -1,7 +1,10 @@
 import express from 'express';
 import webHookRouter from './route/webhookRoute';
 import { ROUTE_WEBHOOK } from '@repo/common/route';
+
 require('dotenv').config();
+require('dotenv').config({ path: `../../.env` });
+console.log("Loaded environment variables");
 
 const PORT: number = Number(process.env.PORT);
 

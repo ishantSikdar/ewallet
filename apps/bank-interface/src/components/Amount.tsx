@@ -1,4 +1,4 @@
-import { BANK_MOCK_BASE, ROUTE_TOKEN, SUB_ROUTE_TRANSACTION_SUCCESS } from "@repo/common/route";
+import { ROUTE_TOKEN, SUB_ROUTE_TRANSACTION_SUCCESS } from "@repo/common/route";
 import { Button } from "@repo/ui/Button";
 import { InputBox } from "@repo/ui/InputBox";
 import axios from "axios";
@@ -20,7 +20,7 @@ export default function Amount({
 
   const handleTransaction = async () => {
     try {
-      const response = await axios.post(`${BANK_MOCK_BASE}${ROUTE_TOKEN}${SUB_ROUTE_TRANSACTION_SUCCESS}`, JSON.stringify({
+      const response = await axios.post(`${process.env.BANK_MOCK_BASE_URL}${ROUTE_TOKEN}${SUB_ROUTE_TRANSACTION_SUCCESS}`, JSON.stringify({
         token: token as string,
         userId: Number(user),
         amount: Number(amount),

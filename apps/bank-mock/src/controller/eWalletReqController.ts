@@ -1,4 +1,4 @@
-import { BANK_INTERFACE_BASE, BANK_WEBHOOK_BASE, ROUTE_WEBHOOK, SUB_ROUTE_DEPOSIT, SUB_ROUTE_WITHDRAW } from '@repo/common/route';
+import { ROUTE_WEBHOOK, SUB_ROUTE_DEPOSIT, SUB_ROUTE_WITHDRAW } from '@repo/common/route';
 import axios from 'axios';
 import { Request, Response } from 'express';
 import { v1 as uuidv1 } from 'uuid';
@@ -18,7 +18,7 @@ export const generateToken = (req: Request, res: Response) => {
     
     res.status(200).json({
         token: token,
-        url: `${BANK_INTERFACE_BASE}/transaction?f=${paymentInfo.amount}&sub=${paymentInfo.userId}&d=${paymentInfo.isDeposit}&token=${token}`,
+        url: `${process.env.BANK_INTERFACE_BASE_URL}/transaction?f=${paymentInfo.amount}&sub=${paymentInfo.userId}&d=${paymentInfo.isDeposit}&token=${token}`,
     });
 };
 
@@ -36,7 +36,7 @@ export const ewalletRequestSuccess = async (req: Request, res: Response) => {
         // update balance of user in their account
         // after updating user balance, send request to eWallet webhook
         const webhookResponse = await axios.post(
-            `${BANK_WEBHOOK_BASE}${ROUTE_WEBHOOK}${transactionInfo.isDeposit ? SUB_ROUTE_DEPOSIT : SUB_ROUTE_WITHDRAW}`,
+            `${process.env.BANK_WEBHOOK_BASE_URL}${ROUTE_WEBHOOK}${transactionInfo.isDeposit ? SUB_ROUTE_DEPOSIT : SUB_ROUTE_WITHDRAW}`,
             JSON.stringify({
                 token: transactionInfo.token,
                 userId: transactionInfo.userId,
