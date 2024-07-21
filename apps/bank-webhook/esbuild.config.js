@@ -1,5 +1,4 @@
 const { build } = require('esbuild');
-const path = require('path');
 
 build({
   entryPoints: ['./src/index.ts'],

@@ -7,6 +7,6 @@ export default defineConfig({
     'process.env': process.env,
   },
   server: {
-    port: Number(process.env.BANK_INTERFACE_PORT)
+    port: Number(process.env.PORT)
   }
 });

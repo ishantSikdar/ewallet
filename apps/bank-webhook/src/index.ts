@@ -1,8 +1,9 @@
 import express from 'express';
 import webHookRouter from './route/webhookRoute';
-import { BANK_WEBHOOK_PORT, ROUTE_WEBHOOK } from '@repo/common/route';
+import { ROUTE_WEBHOOK } from '@repo/common/route';
+require('dotenv').config();
 
-const PORT: number = Number(BANK_WEBHOOK_PORT);
+const PORT: number = Number(process.env.PORT);
 
 const app = express();
 app.use(express.json());

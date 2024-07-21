@@ -5,7 +5,15 @@
     "build": "dotenv -- turbo build",
     "dev": "dotenv -- turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "cd packages/db && npx prisma generate && cd ../..",
+
+    "end-user:dev": "cd ./apps/end-user/ && npm run dev && cd ../..",
+    "end-user:start": "cd ./apps/end-user/ && npm run start && cd ../..",
+    "bank-webhook:start": "cd ./apps/bank-webhook/ && npm run start && cd ../..",
+    "bank-mock:start": "cd ./apps/bank-mock/ && npm run start && cd ../..",
+    "bank-interface:dev": "cd ./apps/bank-interface/ && npm run dev && cd ../..",
+    "bank-interface:build": "cd ./apps/bank-interface/ && npm run build && cd ../.."
   },
   "devDependencies": {
     "dotenv-cli": "^7.4.2",
