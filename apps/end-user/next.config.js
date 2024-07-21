@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
     env: {
         END_USER_BASE_URL: process.env.END_USER_BASE_URL,
