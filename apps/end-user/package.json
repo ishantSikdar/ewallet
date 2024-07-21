@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node ./scripts/load-env.js",
-    "prebuild": "node ./scripts/load-env.js",
-    "prestart": "node ./scripts/load-env.js",
-    "build": "next build",
-    "dev": "dotenv -- next dev --turbo",
-    "start": "npm run build && dotenv -- next start",
+    "build": "dotenv -e .env -e ../../.env -- next build",
+    "dev": "dotenv -e .env -e ../../.env -- next dev --turbo",
+    "start": "dotenv -e .env -e ../../.env  -- next start",
     "lint": "next lint"
   },
   "dependencies": {
