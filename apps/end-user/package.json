@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "predev": "node ./scripts/load-env.js",
+    "prebuild": "node ./scripts/load-env.js",
+    "prestart": "node ./scripts/load-env.js",
+    "dev": "cross-env PORT=$END_USER_PORT next dev --turbo",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env PORT=$END_USER_PORT next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -38,6 +41,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",
     "prisma": "^5.17.0",

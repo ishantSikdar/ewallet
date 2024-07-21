@@ -8,6 +8,7 @@ import { useUserState } from '@repo/store/useUser';
 import { splash } from "../lib/actions/user";
 
 export default function RootHome() {
+
   const router = useRouter();
   const { data: session, status } = useSession();
   const [userState, setUserState] = useUserState();

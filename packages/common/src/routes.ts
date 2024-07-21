@@ -1,7 +1,12 @@
-export const END_USER_BASE = process.env.END_USER_BASE_URL || 'http://localhost:3000';
-export const BANK_WEBHOOK_BASE = process.env.BANK_WEBHOOK_BASE_URL || 'http://localhost:8080';
-export const BANK_MOCK_BASE = process.env.BANK_MOCK_BASE_URL || 'http://localhost:8081';
-export const BANK_INTERFACE_BASE = process.env.BANK_INTERFACE_BASE_URL  || 'http://localhost:5173';
+export const END_USER_BASE = process.env.END_USER_BASE_URL;
+export const BANK_WEBHOOK_BASE = process.env.BANK_WEBHOOK_BASE_URL;
+export const BANK_MOCK_BASE = process.env.BANK_MOCK_BASE_URL;
+export const BANK_INTERFACE_BASE = process.env.BANK_INTERFACE_BASE_URL ;
+
+export const END_USER_PORT = process.env.END_USER_PORT;
+export const BANK_WEBHOOK_PORT = process.env.BANK_WEBHOOK_PORT;
+export const BANK_MOCK_PORT = process.env.BANK_MOCK_PORT;
+export const BANK_INTERFACE_PORT = process.env.BANK_INTERFACE_PORT;
 
 export const ROUTE_WEBHOOK = '/webhook';
 export const ROUTE_TOKEN = '/token';

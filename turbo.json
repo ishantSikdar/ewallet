@@ -15,7 +15,11 @@
         "END_USER_BASE_URL",
         "BANK_WEBHOOK_BASE_URL",
         "BANK_INTERFACE_BASE_URL",
-        "BANK_MOCK_BASE_URL"
+        "BANK_MOCK_BASE_URL",
+        "END_USER_PORT",
+        "BANK_WEBHOOK_PORT",
+        "BANK_MOCK_PORT",
+        "BANK_INTERFACE_PORT"
       ]
     },
     "lint": {
@@ -29,7 +33,11 @@
         "END_USER_BASE_URL",
         "BANK_WEBHOOK_BASE_URL",
         "BANK_INTERFACE_BASE_URL",
-        "BANK_MOCK_BASE_URL"
+        "BANK_MOCK_BASE_URL",
+        "END_USER_PORT",
+        "BANK_WEBHOOK_PORT",
+        "BANK_MOCK_PORT",
+        "BANK_INTERFACE_PORT"
       ]
     }
   }

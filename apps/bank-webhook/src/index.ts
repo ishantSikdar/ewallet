@@ -1,8 +1,8 @@
 import express from 'express';
 import webHookRouter from './route/webhookRoute';
-import { BANK_WEBHOOK_BASE, ROUTE_WEBHOOK } from '@repo/common/route';
+import { BANK_WEBHOOK_PORT, ROUTE_WEBHOOK } from '@repo/common/route';
 
-const PORT: number = Number(BANK_WEBHOOK_BASE.slice(-4)) || 8080;
+const PORT: number = Number(BANK_WEBHOOK_PORT);
 
 const app = express();
 app.use(express.json());
