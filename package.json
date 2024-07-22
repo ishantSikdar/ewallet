@@ -12,10 +12,18 @@
     "end-user:build": "cd ./apps/end-user/ && npm run build && cd ../..",
     "end-user:start": "cd ./apps/end-user/ && npm run start && cd ../..",
 
+    "bank-webhook:dev": "cd ./apps/bank-webhook/ && npm run dev && cd ../..",
+    "bank-webhook:build": "cd ./apps/bank-webhook/ && npm run build && cd ../..",
     "bank-webhook:start": "cd ./apps/bank-webhook/ && npm run start && cd ../..",
+    
+    "bank-mock:dev": "cd ./apps/bank-mock/ && npm run dev && cd ../..",
+    "bank-mock:build": "cd ./apps/bank-mock/ && npm run build && cd ../..",
     "bank-mock:start": "cd ./apps/bank-mock/ && npm run start && cd ../..",
+
     "bank-interface:dev": "cd ./apps/bank-interface/ && npm run dev && cd ../..",
-    "bank-interface:build": "cd ./apps/bank-interface/ && npm run build && cd ../.."
+    "bank-interface:build": "cd ./apps/bank-interface/ && npm run build && cd ../..",
+    "bank-interface:start": "cd ./apps/bank-interface/ && npm run start && cd ../.."
+
   },
   "devDependencies": {
     "dotenv-cli": "^7.4.2",
