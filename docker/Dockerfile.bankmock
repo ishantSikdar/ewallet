@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 # Copy root package files and install dependencies
 COPY package.json package-lock.json turbo.json ./
-COPY apps/end-user/package* ./apps/end-user/
+COPY apps/bank-mock/package* ./apps/bank-mock/
 
 COPY packages/common/package* ./packages/common/
 COPY packages/db/package* ./packages/db/
@@ -15,12 +15,12 @@ COPY packages/typescript-config/package* ./packages/typescript-config/
 RUN npm install
 
 # Copy application source files
-COPY apps/end-user ./apps/end-user
+COPY apps/bank-mock ./apps/bank-mock
 COPY packages ./packages
 
 # Build the app
 RUN npm run db:generate
-RUN npm run end-user:build
+RUN npm run bank-mock:build
 
 # Start the application
-CMD ["npm", "run", "end-user:start"]
+CMD ["npm", "run", "bank-mock:start"]
