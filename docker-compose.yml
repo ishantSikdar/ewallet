@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  end_user:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.enduser
+    container_name: end_user_container
+    networks:
+      - ewallet_network
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker
+      - apps/end-user/.env
+      - packages/db/.env
+
+  bank_webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bankwebhook
+    container_name: bank_webhook_container
+    networks:
+      - ewallet_network
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env.docker
+      - apps/bank-webhook/.env
+      - packages/db/.env
+    
+  bank_mock:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bankmock
+    container_name: bank_mock_container
+    networks:
+      - ewallet_network
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env.docker
+      - apps/bank-mock/.env
+      - packages/db/.env
+
+networks:
+  ewallet_network:
+    driver: bridge
