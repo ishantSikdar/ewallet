@@ -22,6 +22,5 @@ COPY packages ./packages
 RUN npm run db:generate
 RUN npm run end-user:build
 
-
 # Start the application
 CMD ["npm", "run", "end-user:start"]
