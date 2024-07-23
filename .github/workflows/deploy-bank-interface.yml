@@ -21,7 +21,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies      # Install npm dependencies
-        run: npm install
+        run: |
+          pwd
+          npm install
 
       - name: Build React app           # Build react app
         run: npm run bank-interface:build
