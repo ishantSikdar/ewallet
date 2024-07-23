@@ -10,3 +10,5 @@
 # Skip build and dist directories
 **/dist
 **/build
+
+.github
