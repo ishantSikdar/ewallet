@@ -20,10 +20,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies      # Install npm dependencies
+      - name: Cleaning before installing dependencies      # Install npm dependencies
         run: |
-          find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
+          find . -name "node_modules" -type d -prune -exec rm -rf '{}'
           rm -f package-lock.json
+
+      - name: Installing dependencies
+        run: npm install
 
       - name: Build React app           # Build react app
         run: npm run bank-interface:build
