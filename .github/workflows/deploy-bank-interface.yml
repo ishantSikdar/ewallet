@@ -22,7 +22,6 @@ jobs:
 
       - name: Installing dependencies
         run: |
-          cd pwd
           echo $pwd
           npm install
 
