@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "AppBar.tsx", "Button.tsx", "Card.tsx", "CenterOverlay.tsx", "Code.tsx", "IconsRegistry.tsx", "InputBox.tsx", "MenuItem.tsx", "Select.tsx", "WhiteCard.tsx"],
   "exclude": ["node_modules", "dist"]
 }
