@@ -47,7 +47,7 @@ jobs:
               --name bankmock-container \
               -p ${{ vars.BANK_MOCK_APP_PORT }}:${{ vars.BANK_MOCK_APP_PORT }} \
               -e END_USER_BASE_URL=${{ vars.END_USER_BASE_URL }} \
-              -e BANK_mock_BASE_URL=${{ vars.BANK_mock_BASE_URL }} \
+              -e BANK_WEBHOOK_BASE_URL=${{ vars.BANK_WEBHOOK_BASE_URL }} \
               -e BANK_MOCK_BASE_URL=${{ vars.BANK_MOCK_BASE_URL }} \
               -e BANK_INTERFACE_BASE_URL=${{ vars.BANK_INTERFACE_BASE_URL }} \
               -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
