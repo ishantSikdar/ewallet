@@ -20,12 +20,11 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cleaning before installing dependencies      # Install npm dependencies
-        run: |
-          find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
-
       - name: Installing dependencies
-        run: npm install
+        run: |
+          cd pwd
+          echo $pwd
+          npm install
 
       - name: Build React app           # Build react app
         run: npm run bank-interface:build
