@@ -1,5 +1,5 @@
 'use client'
-
+ 
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next-nprogress-bar";
 import { ROUTE_EDIT_USER_INIT, ROUTE_HOME, ROUTE_SIGNIN } from "../constants/routes";
