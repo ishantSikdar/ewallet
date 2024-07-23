@@ -20,10 +20,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Installing dependencies
-        run: |
-          echo $pwd
-          npm install
+      - name: Install dependencies      # Install npm dependencies
+        run: npm install
 
       - name: Build React app           # Build react app
         run: npm run bank-interface:build
