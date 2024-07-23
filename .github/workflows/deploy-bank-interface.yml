@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies      # Install npm dependencies
         run: |
           npm install
-          cd node_modules
+          cd node_modules/@repo
           ls
 
       - name: Build React app           # Build react app
