@@ -22,8 +22,7 @@ jobs:
 
       - name: Install dependencies      # Install npm dependencies
         run: |
-          pwd
-          ls
+          npm list @repo/ui
           npm install
 
       - name: Build React app           # Build react app
