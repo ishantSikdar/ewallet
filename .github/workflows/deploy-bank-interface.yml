@@ -32,12 +32,6 @@ jobs:
           BANK_MOCK_BASE_URL: ${{ vars.BANK_MOCK_BASE_URL }}
           BANK_INTERFACE_BASE_URL: ${{ vars.BANK_INTERFACE_BASE_URL }}
 
-      - name: dist files
-        run: |
-          ls
-          cd apps/bank-interface/dist
-          ls
-
       - name: Upload to S3                      # upload build files to s3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
