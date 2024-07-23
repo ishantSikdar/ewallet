@@ -22,8 +22,10 @@ jobs:
 
       - name: Install dependencies      # Install npm dependencies
         run: |
-          npm list @repo/ui
           npm install
+          cd apps/bank-interface
+          npm install
+          npm list @repo/ui
 
       - name: Build React app           # Build react app
         run: npm run bank-interface:build
