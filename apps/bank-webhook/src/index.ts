@@ -14,7 +14,6 @@ app.use(express.json());
 
 app.use(ROUTE_WEBHOOK, webHookRouter);
 
-
 app.get('/', async (req, res) => {
     try {
         const memoryUsage = process.memoryUsage();
