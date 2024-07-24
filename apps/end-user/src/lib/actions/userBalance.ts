@@ -191,7 +191,7 @@ export async function getP2PTransactions() {
                 minute: "2-digit",
                 month: 'short',
                 day: 'numeric',
-                year: 'numeric',
+                year: '2-digit',
                 timeZone: 'Asia/Kolkata'
             }),
             user: userToShow,
@@ -259,7 +259,7 @@ export async function getUsersAllP2PTransactions() {
                 minute: "2-digit",
                 month: 'short',
                 day: 'numeric',
-                year: 'numeric',
+                year: '2-digit',
                 timeZone: 'Asia/Kolkata'
             }),
         }
