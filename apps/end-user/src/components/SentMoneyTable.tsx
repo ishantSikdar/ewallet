@@ -1,49 +1,47 @@
+'use client'
+
+import { useState } from "react";
 import { P2PTransferType } from "../lib/interfaces/common";
+import { useScreenWidth } from "@repo/store/useApp";
+
 
 export default function SentMoneyTable({ p2pTransactions }: { p2pTransactions: P2PTransferType[] }) {
-
-  return <div className="max-h-[500px] bg-white text-sm rounded-md relative overflow-y-scroll shadow-md  ">
-    {p2pTransactions.length === 0 && <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">No Transactions</div>}
-    <table className="w-full text-center overflow-auto">
-      <thead>
-        <tr className="w-full  text-white  bg-gray-800 ">
-          <td className="py-2 rounded-tl-md border-r-[1pt] border-gray-400">
-            Name
-          </td>
-          <td className="py-2 border-r-[1pt] border-gray-400">
-            Email
-          </td>
-          <td className="py-2 border-r-[1pt] border-gray-400">
-            Number
-          </td>
-          <td className="py-2 border-r-[1pt] border-gray-400">
-            Time
-          </td>
-          <td className="py-2 rounded-tr-md">
-            Amount
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        {p2pTransactions && p2pTransactions.map((t) =>
-          <tr key={t.id} className="bg-white">
-            <td className="py-2 border-[1pt]">
-              {t.user.name}
-            </td>
-            <td className="py-2 border-[1pt]">
-              {t.user.email}
-            </td>
-            <td className="py-2 border-[1pt]">
-              {t.user.number}
-            </td>
-            <td className="py-2 border-[1pt]">
-              {t.timestamp}
-            </td>
-            <td className={`py-2 border-[1pt] ${t.isReceiver ? 'text-green-500' : 'text-red-500'}`}>
-              {t.isReceiver ? '+' : '-'}{(t.amount/100).toFixed(2)}
-            </td>
-          </tr>)}
-      </tbody>
-    </table >
+  return <div className="text-sm">
+    {p2pTransactions.map(transaction => <TableRow key={transaction.id} transaction={transaction} />)}
   </div>
+}
+
+export function TableRow({ transaction }: { transaction: P2PTransferType }) {
+  const [rowStatus, setRowStatus] = useState<boolean>(false);
+  const width = useScreenWidth();
+  const isMobile = width < 768;
+
+  return (
+    <button
+      onClick={() => setRowStatus((p) => !p)}
+      className="w-full rounded-lg shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300 ease-in-out"
+    >
+      <div className="flex justify-between md:justify-around items-center py-4 px-6 border-b border-gray-200">
+        <p className="font-medium text-gray-800">{transaction.name}</p>
+        {!isMobile && (
+          <>
+            <p className="text-gray-600">{transaction.number}</p>
+            <p className="text-gray-600">{transaction.timestamp}</p>
+          </>
+        )}
+        <p className={`font-semibold ${transaction.isReceiver ? 'text-green-500' : 'text-red-500'}`}>{transaction.isReceiver ? '+' : '-'}{(transaction.amount / 100).toFixed(2)}</p>
+      </div>
+
+      <div className={`transition-max-height duration-300 ease-in-out overflow-hidden ${rowStatus ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="h-1 bg-gray-100 mb-1"></div>
+        <div className="px-6 py-4 text-gray-700 text-left">
+          <p className="text-sm">Transaction ID: <span className="font-semibold">{transaction.id}</span></p>
+          <p className="text-sm">Name: <span className="font-semibold">{transaction.name}</span></p>
+          <p className="text-sm">Number: <span className="font-semibold">{transaction.number}</span></p>
+          <p className="text-sm">Time: <span className="font-semibold">{transaction.timestamp}</span></p>
+          <p className="text-sm">Amount: <span className={`font-semibold ${transaction.isReceiver ? 'text-green-500' : 'text-red-500'}`}>{(transaction.amount / 100).toFixed(2)}</span></p>
+        </div>
+      </div>
+    </button>
+  );
 }

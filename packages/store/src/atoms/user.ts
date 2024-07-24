@@ -11,4 +11,3 @@ export const userInitStateAtom = atom({
         lockNumber: false,
     }
 });
-

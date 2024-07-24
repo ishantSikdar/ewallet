@@ -1,8 +1,13 @@
-import SentMoneyTable from "../../../../components/SentMoneyTable";
+import dynamic from "next/dynamic";
 import { getUsersAllP2PTransactions } from "../../../../lib/actions/userBalance";
+
+const SentMoneyTable = dynamic(() => import("../../../../components/SentMoneyTable"), {
+  ssr: false
+})
 
 export default async function TransferedTransactions() {
   const p2pTransactions = await getUsersAllP2PTransactions();
+  console.log(p2pTransactions);
 
   return <div className="h-full">
     <SentMoneyTable p2pTransactions={p2pTransactions} />

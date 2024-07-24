@@ -13,7 +13,7 @@ export default function TransferPages() {
   }
 
   return (
-    <div className="text-sm flex gap-4">
+    <div className="text-sm flex gap-2   md:gap-4">
       <button onClick={() => changePage(ROUTE_TRANSFER_P2P)} className={`${pathname.includes(ROUTE_TRANSFER_P2P) ? 'bg-gray-800 hover:bg-gray-900 text-white ' : 'bg-[#fbf7f6] hover:bg-white'} px-4 py-2 font-medium rounded-md  shadow-md`}>
         Transfer
       </button>

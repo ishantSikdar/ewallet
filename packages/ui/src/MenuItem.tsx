@@ -21,7 +21,7 @@ export default function MenuItem({ iconKey, label, route }: MenuItemType) {
   };
 
   return (
-    <button onClick={sendToPage} className={`${isSelected ? 'bg-gray-800 hover:bg-gray-900 text-white': 'hover:bg-white'} flex gap-2 items-center p-2 rounded-md`}>
+    <button onClick={sendToPage} className={`${isSelected ? 'bg-gray-800 hover:bg-gray-900 text-white': ' hover:bg-gray-100'} shadow-md transition-colors duration-300 ease-in-out flex gap-2 items-center p-2 rounded-md `}>
       {Icon && <Icon className="w-6 h-6" color={isSelected ? '#fff' : '6a7382'} />}
       <h2>{label}</h2>
     </button>

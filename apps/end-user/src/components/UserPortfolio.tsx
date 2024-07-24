@@ -85,8 +85,6 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
       }
 
     },
-    responsive: true,
-    maintainAspectRatio: false, // Ensures the chart takes the full width
     scales: {
       x: {
         ticks: {
@@ -110,7 +108,7 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
     },
   };
 
-  return <div className="h-[200px]">
+  return <div className="">
     <Line data={data} options={options} />
   </div>
 }

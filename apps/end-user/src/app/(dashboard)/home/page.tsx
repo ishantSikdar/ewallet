@@ -9,7 +9,6 @@ export default async function Home() {
     getUserBalanceOvertime(),
     getUserServerSession()
   ]);
-  
 
   const latestBalance = userBalance[userBalance.length - 1];
   const currentBalance = latestBalance?.totalBalance || 0;
@@ -27,14 +26,14 @@ export default async function Home() {
     greet = 'Welcome back, ';
   }
 
-  return <div className="w-full h-full p-5">
-    <h2 className="text-3xl text-gray-800 font-bold p-5">{greet}{session?.user.name}</h2>
-    <WhiteCard className="">
-      <div className="mb-5 ms-2 ">
-        <h2 className="font-medium text-sm text-gray600">Balance</h2>
-        <h2 className="text-gray-600 font-medium text-2xl">₹ <span className="text-black">{(currentBalance/100).toFixed(2)}</span></h2>
+  return <div className="w-full h-full p-3 flex flex-col items-center">
+    <h2 className="text-xl md:text-3xl text-gray-800 font-bold p-5">{greet}{session?.user.name}</h2>
+    <WhiteCard className="w-[90%] p-3">
+      <div className="mb-5">
+        <h2 className="font-medium text-sm text-gray-600">Balance</h2>
+        <h2 className="text-gray-600 font-medium text-2xl">₹ <span className="text-black">{(currentBalance / 100).toFixed(2)}</span></h2>
       </div>
-      <UserPortfolio userBalance={userBalance} />
+        <UserPortfolio userBalance={userBalance} />
       <div className="h-40"></div>
     </WhiteCard>
   </div>

@@ -189,7 +189,6 @@ export async function getP2PTransactions() {
             timestamp: new Date(p.timestamp).toLocaleDateString('en-IN', {
                 hour: '2-digit',
                 minute: "2-digit",
-                weekday: 'short',
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',
@@ -200,13 +199,7 @@ export async function getP2PTransactions() {
     });
 }
 
-export async function getUsersAllP2PTransactions(
-    // name: string,
-    // number: string,
-    // email: string,
-    // agt: number,
-    // alt: number
-) {
+export async function getUsersAllP2PTransactions() {
     const session = await getUserServerSession();
     const userId = Number(session?.user.id);
 
@@ -216,20 +209,6 @@ export async function getUsersAllP2PTransactions(
                 { toUserId: userId },
                 { fromUserId: userId }
             ],
-            // ToUser: {
-            //     name: { contains: name },
-            //     email: { contains: email },
-            //     number: { contains: number },
-            // },
-            // FromUser: {
-            //     name: { contains: name },
-            //     email: { contains: email },
-            //     number: { contains: number },
-            // }, 
-            // amount: {
-            //     gte: agt,
-            //     lte: alt
-            // }
         },
         orderBy: {
             timestamp: 'desc'
@@ -270,18 +249,19 @@ export async function getUsersAllP2PTransactions(
 
         return {
             id: p.id,
+            name: userToShow.name,
+            email: userToShow.email,
+            number: userToShow.number,
             amount: p.amount,
             isReceiver: p.ToUser.id === userId,
             timestamp: new Date(p.timestamp).toLocaleDateString('en-IN', {
                 hour: '2-digit',
                 minute: "2-digit",
-                weekday: 'short',
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',
                 timeZone: 'Asia/Kolkata'
             }),
-            user: userToShow,
         }
     });
 }

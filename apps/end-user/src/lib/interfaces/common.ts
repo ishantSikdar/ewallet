@@ -11,11 +11,9 @@ export interface P2PTransferType {
     amount: number;
     isReceiver: boolean,
     timestamp: string;
-    user: {
-        name: string | null;
-        number: string | null;
-        email: string | null;
-    };
+    name: string | null;
+    number: string | null;
+    email: string | null;
 }
 
 export interface ContactType {
@@ -44,15 +42,15 @@ export interface UserPublicType {
     color: string,
 }
 
-export interface OffRampTransaction {
+export interface RampTransaction {
     id: number,
     amount: number,
     provider: string
     status: string,
-    timestamp: string, 
+    timestamp: string,
 }
 
 export interface TokenType {
-    token: string, 
+    token: string,
     url: string,
 }
