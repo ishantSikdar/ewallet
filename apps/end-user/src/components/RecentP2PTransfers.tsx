@@ -15,7 +15,9 @@ export default function RecentP2PTransfer({ transfers }: { transfers: P2PTransfe
               id={t.id}
               amount={t.amount}
               timestamp={t.timestamp}
-              user={t.user}
+              email={t.name}
+              number={t.number}
+              name={t.name}
               isReceiver={t.isReceiver}
             />
           </>

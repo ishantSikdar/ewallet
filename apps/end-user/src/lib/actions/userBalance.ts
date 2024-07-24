@@ -184,6 +184,9 @@ export async function getP2PTransactions() {
 
         return {
             id: p.id,
+            name: userToShow.name,
+            email: userToShow.email,
+            number: userToShow.number,
             amount: p.amount,
             isReceiver: p.ToUser.id === userId,
             timestamp: new Date(p.timestamp).toLocaleDateString('en-IN', {
@@ -194,7 +197,6 @@ export async function getP2PTransactions() {
                 year: '2-digit',
                 timeZone: 'Asia/Kolkata'
             }),
-            user: userToShow,
         }
     });
 }
