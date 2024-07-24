@@ -23,6 +23,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!api|_next/static|_next/image|favicon.ico|signin).*)',
+        '/((?!api|_next/static|_next/image|favicon.ico|images|signin).*)',
     ]
 }

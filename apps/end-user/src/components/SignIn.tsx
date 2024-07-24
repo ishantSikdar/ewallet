@@ -82,9 +82,9 @@ export default function SignIn() {
   };
 
   return <div className="h-screen w-full flex justify-center items-center">
-    <div className="min-w-96 bg-white shadow-md rounded-md px-10 text-center flex flex-col gap-4 py-10 ">
+    <div className="min-w-44 md:min-w-96  bg-white shadow-md rounded-md px-10 text-center flex flex-col gap-4 py-10 ">
 
-      <Image src={"/app-logo.png"}
+      <Image src={"/images/app-logo.png"}
         alt="Description of the image"
         width="0"
         height="0"
@@ -96,7 +96,7 @@ export default function SignIn() {
       {!showPasswordStage && <>
         <InputBox onKeyDown={(e) => handleEnterKey(e, continueToPassword)} onChange={setPhoneNumber} type="text" placeholder="Enter Mobile Number" />
 
-        <button onClick={continueToPassword} className="rounded-sm w-full bg-blue-500 text-white h-10">
+        <button onClick={continueToPassword} className="rounded-sm w-full bg-[#4c82e4] hover:bg-blue-500 transition-colors duration-300 ease-in-out text-white h-10">
           Next
         </button>
 
@@ -106,30 +106,12 @@ export default function SignIn() {
           <div className='w-full h-[1pt] bg-gray-400'></div>
         </div>
 
-        {/* <button
-          onClick={() => handleOAuthSignIn('github')}
-          className="relative rounded-sm bg-black w-full  text-white h-10">
-          <div className='absolute top-2 left-10'>
-            <Image
-              src={"/github.jpg"}
-              alt="Description of the image"
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="h-6 w-6"
-            />
-          </div>
-          <p className='text-center'>
-            Sign in with GitHub
-          </p>
-        </button> */}
-
         <button
           onClick={() => handleOAuthSignIn('google')}
-          className="relative rounded-sm w-full bg-[#4c82e4] text-white h-10">
-          <div className='absolute top-2 left-10 bg-white rounded-full p-1'>
+          className="relative rounded-sm w-full bg-[#4c82e4] hover:bg-blue-500 transition-colors duration-300 ease-in-out text-white h-10 flex items-center gap-3 justify-center">
+          <div className='bg-white rounded-full p-1'>
             <Image
-              src={"/google-logo.webp"}
+              src={"/images/google-logo.webp"}
               alt="Description of the image"
               width="0"
               height="0"
