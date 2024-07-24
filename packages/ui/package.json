@@ -12,7 +12,8 @@
     "./AppBar": "./src/AppBar.tsx",
     "./Card": "./src/Card.tsx",
     "./Code": "./src/Code.tsx",
-    "./CenterOverlay": "./src/CenterOverlay.tsx"
+    "./CenterOverlay": "./src/CenterOverlay.tsx",
+    "./TriLoader": "./src/TriLoader.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

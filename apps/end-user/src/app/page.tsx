@@ -6,6 +6,7 @@ import { ROUTE_EDIT_USER_INIT, ROUTE_HOME, ROUTE_SIGNIN } from "../constants/rou
 import { useEffect } from "react";
 import { useUserState } from '@repo/store/useUser';
 import { splash } from "../lib/actions/user";
+import TriLoader from "@repo/ui/TriLoader";
 
 export default function RootHome() {
   const router = useRouter();
@@ -43,7 +44,5 @@ export default function RootHome() {
     }
   }, [session]);
 
-  return <>
-    Loading...
-  </>
+  return <TriLoader />
 }
