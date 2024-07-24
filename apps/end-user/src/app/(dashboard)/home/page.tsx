@@ -30,8 +30,8 @@ export default async function Home() {
     <h2 className="text-xl md:text-3xl text-gray-800 font-bold p-5">{greet}{session?.user.name}</h2>
     <WhiteCard className="w-[90%] p-3">
       <div className="mb-5">
-        <h2 className="font-medium text-sm text-gray-600">Balance</h2>
-        <h2 className="text-gray-600 font-medium text-2xl">₹ <span className="text-black">{(currentBalance / 100).toFixed(2)}</span></h2>
+        <h2 className="font-medium text-xs md:text-sm text-gray-600">Balance</h2>
+        <h2 className="text-gray-600 font-medium md:text-2xl">₹ <span className="text-black">{(currentBalance / 100).toFixed(2)}</span></h2>
       </div>
         <UserPortfolio userBalance={userBalance} />
       <div className="h-40"></div>

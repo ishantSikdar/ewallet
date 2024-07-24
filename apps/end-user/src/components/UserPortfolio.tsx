@@ -58,10 +58,10 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
         backgroundColor: (context: any) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 160);
-          gradient.addColorStop(0, "#202938");
-          gradient.addColorStop(1, "white");
+          gradient.addColorStop(0, "rgba(32, 41, 56, 0.5)"); // More transparent color
+          gradient.addColorStop(1, "rgba(255, 255, 255, 0.5)"); // More transparent white
           return gradient;
-        },
+        }
       },
     ],
   };
@@ -85,6 +85,8 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
       }
 
     },
+    responsive: true,
+    maintainAspectRatio: false, // Ensures the chart takes the full width
     scales: {
       x: {
         ticks: {
@@ -108,7 +110,7 @@ export default function UserPortfolio({ userBalance }: { userBalance: UserBalanc
     },
   };
 
-  return <div className="">
+  return <div className="h-[200px]">
     <Line data={data} options={options} />
   </div>
 }

@@ -14,7 +14,7 @@ export default function MobileNavbar() {
     return <></>;
   }
 
-  return <div className={`h-full border-x-[1pt] pb-24 fixed flex flex-col justify-between z-20 bg-soft-white transition-transform duration-300 ${menuBarStatus ? 'transform translate-x-0' : 'transform translate-x-full'}`}>
+  return <div className={`h-full border-x-[1pt] pb-24 fixed flex flex-col justify-between z-30 bg-soft-white transition-transform duration-300 ${menuBarStatus ? 'transform translate-x-0' : 'transform translate-x-full'}`}>
     <div>
       <NavBar />
     </div>

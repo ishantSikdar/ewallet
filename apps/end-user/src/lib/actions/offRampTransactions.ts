@@ -32,7 +32,7 @@ export async function getRecentOffRampTransactions() {
             minute: '2-digit',
             month: 'short',
             day: 'numeric',
-            year: 'numeric',
+            year: '2-digit',
             timeZone: 'Asia/Kolkata'
         })
     }));

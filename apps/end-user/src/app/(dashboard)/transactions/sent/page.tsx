@@ -7,7 +7,6 @@ const SentMoneyTable = dynamic(() => import("../../../../components/SentMoneyTab
 
 export default async function TransferedTransactions() {
   const p2pTransactions = await getUsersAllP2PTransactions();
-  console.log(p2pTransactions);
 
   return <div className="h-full">
     <SentMoneyTable p2pTransactions={p2pTransactions} />
