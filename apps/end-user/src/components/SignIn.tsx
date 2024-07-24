@@ -7,10 +7,12 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import Notice from './Notice';
 import { InputBox } from '@repo/ui/InputBox';
+import { useSearchParams } from 'next/navigation';
 
 
 export default function SignIn() {
   
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [showPasswordStage, setShowPasswordStage] = useState<boolean>(false);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -43,8 +45,14 @@ export default function SignIn() {
         setError(res.error);
 
       } else {
-        console.log("redirect to home")
-        router.push('/');
+        const redirectUrl = new URLSearchParams(window.location.search).get('redirect');
+        if (redirectUrl) {
+          console.log("redirect back to where user")
+          router.push(decodeURIComponent(redirectUrl));
+        } else {
+          console.log("redirect to home")
+          router.push('/');
+        }
       }
     } catch (error) {
       console.error(`Login error`, error);
@@ -53,19 +61,25 @@ export default function SignIn() {
   }
 
 
+
   const handleOAuthSignIn = async (provider: string) => {
     try {
-      console.log("using oauth")
+      console.log("using oauth");
+      const redirect = searchParams.get('redirect'); // Extract redirect parameter
+
       const res = await signIn(provider, {
-        redirect: true,
-        callbackUrl: "/"
+        redirect: false,
+        callbackUrl: redirect ? decodeURIComponent(redirect) : '/',
       });
 
+      if (res?.url) {
+        window.location.href = res.url; // Redirect manually
+      }
     } catch (error) {
-      console.error(`Login error`, error);
-      setError(error instanceof Error ? error.message : 'Unknown Error Occured');
+      console.error('Login error', error);
+      setError(error instanceof Error ? error.message : 'Unknown Error Occurred');
     }
-  }
+  };
 
   return <div className="h-screen w-full flex justify-center items-center">
     <div className="min-w-96 bg-white shadow-md rounded-md px-10 text-center flex flex-col gap-4 py-10 ">

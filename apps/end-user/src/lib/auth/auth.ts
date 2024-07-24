@@ -11,7 +11,6 @@ import { CredentialsType } from "../interfaces/common";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import { preloadFont } from "next/dist/server/app-render/entry-base";
 
 export const authOptions: NextAuthOptions = {
     providers: [
