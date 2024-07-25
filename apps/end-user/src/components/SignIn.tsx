@@ -82,7 +82,7 @@ export default function SignIn() {
   };
 
   return <div className="h-[100dvh] w-full flex justify-center items-center">
-    <div className="min-w-[90%] sm:min-w-96 bg-soft-white shadow-md rounded-md px-10 text-center flex flex-col gap-4 py-10 ">
+    <div className="min-w-[90%] sm:min-w-96 bg-white border-[2pt] shadow-md rounded-md px-10 text-center flex flex-col gap-4 py-10 ">
 
       <Image src={"/images/app-logo.png"}
         alt="Description of the image"
