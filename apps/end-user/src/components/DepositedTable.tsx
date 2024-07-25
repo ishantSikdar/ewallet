@@ -18,7 +18,7 @@ export function TableRow({ transaction }: { transaction: RampTransaction }) {
 
   return (
     <button
-      onClick={() => setRowStatus((p) => !p)}
+      onClick={isMobile ? () => setRowStatus((p) => !p): () => ''}
       className="w-full rounded-lg shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300 ease-in-out"
     >
       <div className="flex justify-between md:justify-around items-center py-4 px-6 border-b border-gray-200">
