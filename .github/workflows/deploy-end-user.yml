@@ -46,6 +46,7 @@ jobs:
             
             sudo docker run -d \
               --name enduser-container \
+              --restart=unless-stopped \
               -p ${{ vars.END_USER_APP_PORT }}:${{ vars.END_USER_APP_PORT }} \
               -e END_USER_BASE_URL=${{ vars.END_USER_BASE_URL }} \
               -e BANK_WEBHOOK_BASE_URL=${{ vars.BANK_WEBHOOK_BASE_URL }} \
