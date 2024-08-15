@@ -45,6 +45,7 @@ jobs:
             
             sudo docker run -d \
               --name bankmock-container \
+              --restart=unless-stopped \
               -p ${{ vars.BANK_MOCK_APP_PORT }}:${{ vars.BANK_MOCK_APP_PORT }} \
               -e END_USER_BASE_URL=${{ vars.END_USER_BASE_URL }} \
               -e BANK_WEBHOOK_BASE_URL=${{ vars.BANK_WEBHOOK_BASE_URL }} \
