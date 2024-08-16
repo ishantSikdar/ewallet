@@ -64,3 +64,5 @@ This Turborepo includes the following packages/apps:
 - `@repo/store`: Centeralised folder for [Recoil](packages/store/) hooks, atoms and selectors.
 
 Each package/app is 100% Typescript.
+
+[Excalidraw](https://excalidraw.com/#json=64FyRO6VSFQKsHQWlCylK,Jb3F5IV010z89Y5kg09fKQ)
